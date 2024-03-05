@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
     private String username;
     private String password;
     private String FirstName;
@@ -30,6 +31,7 @@ public class User {
             if (book.getCopies() > 0){
                 BorrowedBooks b = new BorrowedBooks(this, book);
                 this.borrowedBooks.add(b);
+                App.getAllBorrowedBooks().add(b);
                 return "You have succesfully borrowed" + book.getTitle();
             }
             else {return "There are no copies of the book available.";}
@@ -103,6 +105,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public void setBorrowedBooks(List<BorrowedBooks> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+
+    public List<BorrowedBooks> getBorrowedBooks() {
+        return borrowedBooks;
     }
 
 }

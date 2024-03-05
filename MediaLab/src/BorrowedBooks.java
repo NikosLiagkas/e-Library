@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class BorrowedBooks {
+public class BorrowedBooks implements Serializable{
     
     private User user;
     private Book borrowedBook;
