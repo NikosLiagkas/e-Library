@@ -1,3 +1,4 @@
+package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class User implements Serializable{
             if (book.getCopies() > 0){
                 BorrowedBooks b = new BorrowedBooks(this, book);
                 this.borrowedBooks.add(b);
-                App.getAllBorrowedBooks().add(b);
+                LibraryManager.getAllBorrowedBooks().add(b);
                 return "You have succesfully borrowed" + book.getTitle();
             }
             else {return "There are no copies of the book available.";}

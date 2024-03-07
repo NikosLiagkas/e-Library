@@ -1,6 +1,8 @@
+package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Admin extends User {
        
@@ -12,9 +14,9 @@ public class Admin extends User {
     public void createBook(String title, String author, String publisher, String ISBN, int release_year, 
     String language, int copies, Category category){
         Book b = new Book(title, author, publisher, ISBN, release_year, language, copies);
-        App.getAllBooks().add(b);
+        LibraryManager.getAllBooks().add(b);
 
-        List<Category> c = App.getAllCategories();
+        List<Category> c = LibraryManager.getAllCategories();
         for (Category categories : c){
             if (categories.equals(category)) {
                 categories.getCatBooks().add(b);
@@ -25,16 +27,16 @@ public class Admin extends User {
 
     //delete a book
     public void deleteBook(Book delBook){
-        for (Book b : App.allBooks){
-            if (delBook.equals(b)){App.allBooks.remove(b);}
+        for (Book b : LibraryManager.allBooks){
+            if (delBook.equals(b)){LibraryManager.allBooks.remove(b);}
         }
 
-        for (BorrowedBooks bb : App.allBorrowedBooks){
-            if (delBook.equals(bb.getBorrowedBook())){App.allBorrowedBooks.remove(bb);}
+        for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
+            if (delBook.equals(bb.getBorrowedBook())){LibraryManager.allBorrowedBooks.remove(bb);}
         }
         
         //might be unnecessary
-        for (User user : App.allUsers){
+        for (User user : LibraryManager.allUsers){
             for (BorrowedBooks userbb : user.getBorrowedBooks()){
                 if (delBook.equals(userbb.getBorrowedBook())){user.getBorrowedBooks().remove(userbb);}
             }
@@ -73,7 +75,7 @@ public class Admin extends User {
     //creation, deletion and modification of a category
     public void createCategory(String category){
         Category c = new Category(category);
-        App.getAllCategories().add(c);
+        LibraryManager.getAllCategories().add(c);
     }
 
     public void deleteCategory(Category delCategory){
@@ -81,9 +83,9 @@ public class Admin extends User {
             deleteBook(b);
         }
 
-        for (Category c : App.allCategories){
+        for (Category c : LibraryManager.allCategories){
             if (c.equals(delCategory)){
-                App.allCategories.remove(c);
+                LibraryManager.allCategories.remove(c);
             }
         }
     }
@@ -96,7 +98,7 @@ public class Admin extends User {
 
     //modification of user info 
     public String changeUserName(User user, String newUsername){
-        for (User u : App.allUsers){
+        for (User u : LibraryManager.allUsers){
             if (u.getUsername().equals(newUsername)){
                 return ("This username is already taken. Please choose another one.");
             }
@@ -126,15 +128,15 @@ public class Admin extends User {
 
     //deletion of a user
     public void deleteUser(User delUser){
-        for (BorrowedBooks bb : App.allBorrowedBooks){
+        for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
             if (bb.getUser().equals(delUser)){
-                App.allBorrowedBooks.remove(bb);
+                LibraryManager.allBorrowedBooks.remove(bb);
             }
         }
 
-        for (User user : App.allUsers){
+        for (User user : LibraryManager.allUsers){
             if (user.equals(delUser)){
-                App.allUsers.remove(user);
+                LibraryManager.allUsers.remove(user);
             }
         }
     }
@@ -143,7 +145,7 @@ public class Admin extends User {
     public List<BorrowedBooks> seeAllActiveBorrows(){
         List<BorrowedBooks> ActiveBorrowedBooks;
         ActiveBorrowedBooks = new ArrayList<>();
-        for (BorrowedBooks bb : App.getAllBorrowedBooks()){
+        for (BorrowedBooks bb : LibraryManager.getAllBorrowedBooks()){
             if  (bb.getActiveBorrow()==true){
                 ActiveBorrowedBooks.add(bb);
             }

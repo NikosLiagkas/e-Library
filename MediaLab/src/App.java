@@ -1,3 +1,4 @@
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,29 +14,13 @@ import java.util.List;
 
 public class App extends Application{
 
-    public static List<Admin> allAdmins;
-    public static List<Book> allBooks;
-    public static List<BorrowedBooks> allBorrowedBooks;
-    public static List<User> allUsers;
-    public static List<Category> allCategories;
-    public static User loggedUser;
+    
 
     @Override
     public void init() {}
 
     @Override
     public void start(Stage primaryStage) {
-        
-        File a = new File("src/medialab/admin.ser");
-        Admin x = new Admin("liagito", "123", "Nikos", "Liagas", "AM12345", "nikos@gmail.com");
-        Admin y = new Admin("l", "3", "Nis", "Lis", "12345", "kos@gmail.com");
-        allAdmins = new ArrayList<>();
-        allAdmins.add(x);
-        allAdmins.add(y);
-        Data.serialize(a, allAdmins);
-        List<Admin> ad = Data.deserialize(a);
-        System.out.println(ad);
-        Platform.exit();
     }
 
     @Override
@@ -45,56 +30,6 @@ public class App extends Application{
         launch(args);
     }
 
-    public static void setAllAdmins(List<Admin> allAdmins) {
-        App.allAdmins = allAdmins;
-    }
-
-    public static List<Admin> getAllAdmins() {
-        return allAdmins;
-    }
-
-    public static void setAllBooks(List<Book> allBooks) {
-        App.allBooks = allBooks;
-    }
-
-    public static List<Book> getAllBooks() {
-        return allBooks;
-    }
-
-    public static void setAllBorrowedBooks(List<BorrowedBooks> allBorrowedBooks) {
-        App.allBorrowedBooks = allBorrowedBooks;
-    }
-
-    public static List<BorrowedBooks> getAllBorrowedBooks() {
-        return allBorrowedBooks;
-    }
-
-    public static void setAllCategories(List<Category> allCategories) {
-        App.allCategories = allCategories;
-    }
-
-    public static List<Category> getAllCategories() {
-        return allCategories;
-    }
-
-    public static void setAllUsers(List<User> allUsers) {
-        App.allUsers = allUsers;
-    }
-
-    public static List<User> getAllUsers() {
-        return allUsers;
-    }
-
-    public static void setLoggedUser(User loggedUser) {
-        App.loggedUser = loggedUser;
-    }
-
-    public static User getLoggedUser() {
-        return loggedUser;
-    }
-
-
-    
 }
 
 
