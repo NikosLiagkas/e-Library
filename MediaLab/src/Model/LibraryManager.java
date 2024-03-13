@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.List;
+import java.io.File;
 
 public class LibraryManager {
     public static List<Admin> allAdmins;
@@ -10,6 +11,21 @@ public class LibraryManager {
     public static List<Category> allCategories;
     public static User loggedUser;
 
+    public static void retrieveData(){
+        allAdmins = Data.deserialize("src/medialab/admin.ser");
+        allBooks = Data.deserialize("src/medialab/book.ser");
+        allBorrowedBooks = Data.deserialize("src/medialab/borrowedbooks.ser");
+        allCategories = Data.deserialize("src/medialab/category.ser");
+        allUsers = Data.deserialize("src/medialab/user.ser");
+    }
+
+    public static void saveData(){
+        Data.serialize("src/medialab/admin.ser", allAdmins);
+        Data.serialize("src/medialab/book.ser", allBooks);
+        Data.serialize("src/medialab/borrowedbooks.ser", allBorrowedBooks);
+        Data.serialize("src/medialab/category.ser", allCategories);
+        Data.serialize("src/medialab/user.ser", allUsers);
+    }
 
     public static void setAllAdmins(List<Admin> allAdmins) {
         LibraryManager.allAdmins = allAdmins;

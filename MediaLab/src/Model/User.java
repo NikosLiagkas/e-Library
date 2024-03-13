@@ -23,22 +23,30 @@ public class User implements Serializable{
     }
 
 
-    public String borrowBook(Book book){
-        int count = 0;
-        for (BorrowedBooks b : this.borrowedBooks){
-            if (b.getActiveBorrow()==true) {count++;}
-        }
-        if (count < 2){
-            if (book.getCopies() > 0){
-                BorrowedBooks b = new BorrowedBooks(this, book);
-                this.borrowedBooks.add(b);
-                LibraryManager.getAllBorrowedBooks().add(b);
-                return "You have succesfully borrowed" + book.getTitle();
+    public void borrowBook(Book book){
+        //try{
+            int count = 0;
+            for (BorrowedBooks b : this.borrowedBooks){
+                if (b.getActiveBorrow()==true) {count++;}
             }
-            else {return "There are no copies of the book available.";}
+            if (count < 2){
+                if (book.getCopies() > 0){
+                    BorrowedBooks b = new BorrowedBooks(this, book);
+                    this.borrowedBooks.add(b);
+                    LibraryManager.getAllBorrowedBooks().add(b);
+                    //return "You have succesfully borrowed" + book.getTitle(); Must goooooooooooooooooooooooooo
+                }
+                else {/*throw new NoCopiesException(); */}
+            }
+            else 
+        {/*throw new BorrowLimitException();*/}
+       /* }
+        catch(NoCopiesException c){
+            c.printStackTrace();
         }
-        else 
-        {return "You can't borrow more than 2 books.";}
+        catch(BorrowLimitException b){
+            b.printStackTrace();
+        } */
     }
 
 
@@ -49,6 +57,66 @@ public class User implements Serializable{
             }
         }
         
+    }
+
+    public List<Book> searchBookByTitle(String search){
+        List<Book> matches = new ArrayList<>();
+        for (Book b : LibraryManager.allBooks){
+            if (b.getTitle().contains(search)){
+                matches.add(b);
+            }           
+        }
+        return (matches);
+    }
+
+    public List<Book> searchBookByAuthor(String search){
+        List<Book> matches = new ArrayList<>();
+        for (Book b : LibraryManager.allBooks){
+            if (b.getAuthor().contains(search)){
+                matches.add(b);
+            }           
+        }
+        return (matches);
+    }
+
+    public List<Book> searchBookByYear(int search){
+        List<Book> matches = new ArrayList<>();
+        for (Book b : LibraryManager.allBooks){
+            if (b.getRelease_year() == search){
+                matches.add(b);
+            }           
+        }
+        return (matches);
+    }
+
+    public List<Book> CombSearchTitleAuthor(String title, String author){
+        List<Book> matches = searchBookByTitle(title);
+        List<Book> list1 = searchBookByAuthor(author);
+        matches.retainAll(list1);
+        return (matches);     
+    }
+    
+    public List<Book> CombSearchTitleYear(String title, int year){
+        List<Book> matches = searchBookByTitle(title);
+        List<Book> list1 = searchBookByYear(year);
+        matches.retainAll(list1);
+        return (matches);     
+    }
+
+    public List<Book> CombSearchAuthorYear(String author, int year){
+        List<Book> matches = searchBookByAuthor(author);
+        List<Book> list1 = searchBookByYear(year);
+        matches.retainAll(list1);
+        return (matches);     
+    }
+
+    public List<Book> CombSearchTitleAuthorYear(String title, String author, int year){
+        List<Book> matches = searchBookByTitle(title);
+        List<Book> list1 = searchBookByAuthor(author);
+        List<Book> list2 = searchBookByYear(year);
+        list1.retainAll(list2);
+        matches.retainAll(list1);
+        return (matches);     
     }
 
     public void reviewBook(Book book, String review){

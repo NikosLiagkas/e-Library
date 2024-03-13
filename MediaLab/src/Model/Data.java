@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Data {
-    public static <T> void serialize(File targetFile, List<T> objectList){
+    public static <T> void serialize(String targetFile, List<T> objectList){
         try {
+            new File (targetFile);
             FileOutputStream fileOut = new FileOutputStream(targetFile);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
@@ -30,9 +31,10 @@ public class Data {
     }
 
     // deserialize whole list of any type
-    public static <T> List<T> deserialize(File targetFile) {
+    public static <T> List<T> deserialize(String targetFile) {
         List<T> objectList = null;
         try {
+            new File (targetFile);
             FileInputStream fileIn = new FileInputStream(targetFile);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             objectList = (List<T>) in.readObject();

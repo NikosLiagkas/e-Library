@@ -1,5 +1,4 @@
 package Model;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,16 +95,21 @@ public class Admin extends User {
 
 
 
-    //modification of user info 
-    public String changeUserName(User user, String newUsername){
-        for (User u : LibraryManager.allUsers){
-            if (u.getUsername().equals(newUsername)){
-                return ("This username is already taken. Please choose another one.");
+    //modification of user info !!!
+    public void changeUserName(User user, String newUsername){
+        //try {
+            for (User u : LibraryManager.allUsers){
+                if (u.getUsername().equals(newUsername)){
+                //return ("This username is already taken. Please choose another one."); must gooooooooooo
+                //throw new UsernameTakenException();
+                }
+                else {continue;}
             }
-            else {continue;}
-        }
-        user.setUsername(newUsername);
-        return ("Username succesfully changed.");
+            user.setUsername(newUsername);
+       /*  }
+        catch (UsernameTakenException u) {
+            u.printStackTrace();
+        } */
     }
 
     public void changeUserPassword(User user, String newPassword){

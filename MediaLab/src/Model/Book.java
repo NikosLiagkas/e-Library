@@ -1,3 +1,4 @@
+package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +130,23 @@ public class Book implements Serializable{
         public Ratings(User user, int rating){
             this.user = user;
             this.rating = rating;
+
+        }
+
+        public void setRating(int rating) {
+            this.rating = rating;
+        }
+
+        public int getRating() {
+            return rating;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+
+        public User getUser() {
+            return user;
         }
     }
 
@@ -140,14 +158,48 @@ public class Book implements Serializable{
             this.user = user;
             this.review = review;
         }
+
+        public void setReview(String review) {
+            this.review = review;
+        }
+
+        public String getReview() {
+            return review;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+
+        public User getUser() {
+            return user;
+        }
     }
     
 
     public void createRating(User user, int rating){
-        if (rating>0 && rating<6){
-            Ratings r = new Ratings(user, rating);
-            this.ratings.add(r);
-        }
+        
+       // try {
+            for (Ratings r : this.ratings){
+                if (r.user.equals(user)){
+                    if (rating>0 && rating<6){
+                        r.setRating(rating);
+                        change_avgRating();
+                        return;
+                    }      
+                    else {
+                        //throw new InvalidRatingException();
+                    }          
+                }
+            }
+            if (rating>0 && rating<6){
+                    Ratings rate = new Ratings(user, rating);
+                    this.ratings.add(rate);
+            }
+      /*  }
+        catch(InvalidRatingException i) {
+            //System.out.println("Invalid Rating. Please rate the book 1 through 5."); must goooooooo????
+        }*/
     }
 
     public void createReview(User user, String review){

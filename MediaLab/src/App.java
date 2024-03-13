@@ -12,6 +12,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controller.GeneralController;
+
 public class App extends Application{
 
     
@@ -21,6 +23,9 @@ public class App extends Application{
 
     @Override
     public void start(Stage primaryStage) {
+        GeneralController.setStage(primaryStage);
+        GeneralController.loadPage("/View/user_template.fxml");
+        //GeneralController.loadTemplatePage("/View/all_books.fxml");
     }
 
     @Override

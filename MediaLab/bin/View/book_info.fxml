@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #CEDFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="19.0" layoutY="6.0" prefHeight="34.0" prefWidth="582.0" text="Book Title" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="67.0" prefHeight="20.0" prefWidth="98.0" text="Author:" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="67.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="99.0" prefHeight="18.0" prefWidth="97.0" text="Publisher:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="134.0" prefHeight="18.0" prefWidth="97.0" text="ISBN:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="165.0" prefHeight="18.0" prefWidth="97.0" text="Release Year:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="199.0" prefHeight="18.0" prefWidth="97.0" text="Category:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="68.0" text="getAuthor">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="100.0" text="getPublisher">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="135.0" text="getISBN">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="166.0" text="getReleaseYear">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="200.0" text="getCategory">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="41.0" text="8,8">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="41.0" text="(Rated by 26 Users)" />
+      <Label layoutX="19.0" layoutY="231.0" prefHeight="18.0" prefWidth="97.0" text="Copies:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="232.0" text="getCopies">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="265.0" prefHeight="18.0" prefWidth="97.0" text="Reviews:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="151.0" layoutY="266.0" prefHeight="18.0" prefWidth="131.0" text="Reviewed by 26 Users" />
+      <ListView layoutX="19.2" layoutY="290.4" prefHeight="57.0" prefWidth="563.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="290.0" />
+   </children>
+   <effect>
+      <ColorAdjust saturation="-0.3" />
+   </effect>
+</AnchorPane>

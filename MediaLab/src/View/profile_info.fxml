@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #CEDFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="286.0" layoutY="22.0" prefHeight="42.0" prefWidth="600.0" text="My Profile" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="67.0" prefHeight="20.0" prefWidth="98.0" text="First Name:" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="67.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="99.0" prefHeight="18.0" prefWidth="97.0" text="Last Name:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="134.0" prefHeight="18.0" prefWidth="97.0" text="Username:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="165.0" prefHeight="18.0" prefWidth="97.0" text="Email:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="199.0" prefHeight="18.0" prefWidth="97.0" text="ID number:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="68.0" text="getFirstName">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="100.0" text="getLastName">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="135.0" text="getUsername">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="166.0" text="getEmail">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="200.0" text="getIDnumber">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
+   </children>
+   <effect>
+      <ColorAdjust saturation="-0.3" />
+   </effect>
+</AnchorPane>

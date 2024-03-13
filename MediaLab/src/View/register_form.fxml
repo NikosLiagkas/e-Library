@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #CEDFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignUpController">
+   <top>
+      <AnchorPane prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: #87A2C0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="18.0" prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: #87A2C0;" text="Welcome to e-Library" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Georgia Bold Italic" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #87A2C0;" text="Back to Homepage" AnchorPane.leftAnchor="14.0">
+               <effect>
+                  <ColorAdjust saturation="0.33" />
+               </effect>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <effect>
+      <ColorAdjust saturation="-0.3" />
+   </effect>
+   <center>
+      <AnchorPane prefHeight="94.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="286.0" layoutY="36.8" prefHeight="54.0" prefWidth="600.0" text="Sign up to browse and borrow e-Library books. " AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="firstNameField" layoutX="225.0" layoutY="87.0" promptText="First Name" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
+            <TextField fx:id="emailField" layoutX="225.0" layoutY="54.0" promptText="Email" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
+            <TextField fx:id="lastNameField" layoutX="225.0" layoutY="121.0" promptText="Last Name" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
+            <TextField fx:id="usernameField" layoutX="225.0" layoutY="154.0" promptText="Username" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
+            <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="188.0" promptText="Password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
+            <PasswordField fx:id="confirmPasswordField" layoutX="225.0" layoutY="223.0" promptText="Confirm Password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
+            <TextField fx:id="idNumberField" layoutX="226.0" layoutY="259.0" promptText="ID number" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
+            <Button fx:id="signupButton" layoutX="225.0" layoutY="297.0" mnemonicParsing="false" prefWidth="149.6" style="-fx-background-color: #87A2C0;" text="Sign Up" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6">
+               <effect>
+                  <ColorAdjust saturation="0.75" />
+               </effect>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

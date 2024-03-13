@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="Hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="114.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="title" prefHeight="22.0" prefWidth="600.0" text="book title">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="author" prefHeight="18.0" prefWidth="612.0" text="Author" />
+            <Label fx:id="ISBN" prefHeight="18.0" prefWidth="602.0" text="ISBN" />
+            <Label fx:id="rating" prefHeight="18.0" prefWidth="607.0" text="Rating (Number of Users that Rated)" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
