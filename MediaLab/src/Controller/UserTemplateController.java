@@ -3,6 +3,7 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.LibraryManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -62,10 +63,10 @@ public class UserTemplateController implements Initializable{
         logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-               // GeneralController.setBook(null);
-                //GeneralController.setTemplate(null);
+                GeneralController.setBook(null);
+                GeneralController.setTemplate(null);
 
-                //fix logged user !!!!!
+                LibraryManager.setLoggedUser(null);
               
                 GeneralController.loadPage("/View/home.fxml");
             }
@@ -74,7 +75,7 @@ public class UserTemplateController implements Initializable{
         profInfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GeneralController.loadPage("/View/profile_info.fxml");
+                GeneralController.loadTemplatePage("/View/profile_info.fxml");
             }
         });
 

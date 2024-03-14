@@ -8,22 +8,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="76.0" prefWidth="425.0">
          <children>
-            <Label prefHeight="22.0" prefWidth="416.0" text="book title">
+            <Label fx:id="title" prefHeight="22.0" prefWidth="416.0" text="book title">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label prefHeight="18.0" prefWidth="413.0" text="Author" />
-            <Label prefHeight="18.0" prefWidth="414.0" text="ISBN" />
-            <Label prefHeight="18.0" prefWidth="414.0" text="Rating (Number of Users that Rated)" />
+            <Label fx:id="author" prefHeight="18.0" prefWidth="413.0" text="Author" />
+            <Label fx:id="isbn" prefHeight="18.0" prefWidth="414.0" text="ISBN" />
+            <Label fx:id="rating" prefHeight="18.0" prefWidth="414.0" text="Rating (Number of Users that Rated)" />
          </children>
       </VBox>
-      <Button blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Details">
+      <Button fx:id="bookDetailsButton" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Details">
          <HBox.margin>
             <Insets right="15.0" top="20.0" />
          </HBox.margin>
@@ -31,7 +30,7 @@
             <ColorAdjust saturation="0.75" />
          </effect>
       </Button>
-      <Button blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Review">
+      <Button fx:id="reviewButton" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Review">
          <HBox.margin>
             <Insets top="20.0" />
          </HBox.margin>

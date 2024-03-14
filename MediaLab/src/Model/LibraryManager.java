@@ -9,7 +9,7 @@ public class LibraryManager {
     public static List<BorrowedBooks> allBorrowedBooks;
     public static List<User> allUsers;
     public static List<Category> allCategories;
-    public static User loggedUser;
+    public static User loggedUser = new User("nikos", "null", "null", "null", "null", "null");
 
     public static void retrieveData(){
         allAdmins = Data.deserialize("src/medialab/admin.ser");

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.ColorAdjust?>
@@ -86,6 +87,11 @@
       </Label>
       <Label layoutX="151.0" layoutY="266.0" prefHeight="18.0" prefWidth="131.0" text="Reviewed by 26 Users" />
       <ListView layoutX="19.2" layoutY="290.4" prefHeight="57.0" prefWidth="563.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="290.0" />
+      <Button layoutX="495.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: #87A2C0;" text="Borrow" AnchorPane.rightAnchor="26.599999999999994">
+         <effect>
+            <ColorAdjust saturation="0.75" />
+         </effect>
+      </Button>
    </children>
    <effect>
       <ColorAdjust saturation="-0.3" />

@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="360.0" prefWidth="600.0" style="-fx-background-color: #CEDFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="360.0" prefWidth="600.0" style="-fx-background-color: #CEDFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchBookController">
    <children>
       <Label alignment="TOP_CENTER" prefHeight="42.0" prefWidth="600.0" text="Search Book" AnchorPane.bottomAnchor="306.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="208.0" layoutY="109.0" prefHeight="26.0" prefWidth="182.0" promptText="Search Book by Title" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0" />
-      <TextField layoutX="209.0" layoutY="147.0" prefHeight="26.0" prefWidth="182.0" promptText="Search Book by Author" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0" />
-      <TextField layoutX="209.0" layoutY="187.0" prefHeight="26.0" prefWidth="182.0" promptText="Search Book by Release Year" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0" />
-      <Button layoutX="274.0" layoutY="232.0" mnemonicParsing="false" prefWidth="182.0" style="-fx-background-color: #87A2C0;" text="Search" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0">
+      <TextField fx:id="titleField" layoutX="208.0" layoutY="109.0" prefHeight="26.0" prefWidth="182.0" promptText="Search Book by Title" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0" />
+      <TextField fx:id="authorField" layoutX="209.0" layoutY="147.0" prefHeight="26.0" prefWidth="182.0" promptText="Search Book by Author" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0" />
+      <TextField fx:id="yearField" layoutX="209.0" layoutY="187.0" prefHeight="26.0" prefWidth="182.0" promptText="Search Book by Release Year" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0" />
+      <Button fx:id="searchButton" layoutX="274.0" layoutY="232.0" mnemonicParsing="false" prefWidth="182.0" style="-fx-background-color: #87A2C0;" text="Search" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="208.0">
          <effect>
             <ColorAdjust saturation="0.75" />
          </effect>
