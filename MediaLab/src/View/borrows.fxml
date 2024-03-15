@@ -15,16 +15,16 @@
       </Label>
       <Label layoutX="19.0" layoutY="56.0" prefHeight="20.0" prefWidth="109.0" text="Active Borrows" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="56.0">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ListView fx:id="activeBorrowsList" blendMode="MULTIPLY" fixedCellSize="40.0" layoutX="16.0" layoutY="76.0" prefHeight="83.0" prefWidth="564.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.0" />
-      <Label layoutX="19.0" layoutY="170.0" prefHeight="20.0" prefWidth="109.0" text="Borrow History" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="170.0">
+      <ListView fx:id="activeBorrowsList" blendMode="MULTIPLY" layoutX="16.0" layoutY="76.0" prefHeight="186.0" prefWidth="564.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.0" />
+      <Label layoutX="19.0" layoutY="269.0" prefHeight="20.0" prefWidth="109.0" text="Borrow History" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="269.0">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ListView fx:id="borrowHistoryList" blendMode="MULTIPLY" fixedCellSize="40.0" layoutX="18.0" layoutY="194.0" prefHeight="134.0" prefWidth="558.0" AnchorPane.bottomAnchor="19.19999999999999" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="194.0" />
+      <ListView fx:id="borrowHistoryList" blendMode="MULTIPLY" layoutX="18.0" layoutY="288.8" prefHeight="54.0" prefWidth="562.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="289.0" />
    </children>
    <effect>
       <ColorAdjust saturation="-0.3" />

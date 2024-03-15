@@ -4,36 +4,36 @@ import java.time.LocalDate;
 
 public class BorrowedBooks implements Serializable{
     
-    private User user;
-    private Book borrowedBook;
+    private String username;
+    private String bookISBN;
     private LocalDate borrowDate;
     private LocalDate returnDate;
     private boolean activeBorrow;
 
 
-    public BorrowedBooks(User user, Book book){
-        this.user = user;
-        this.borrowedBook = book;
+    public BorrowedBooks(String username, String ISBN){
+        this.username = username;
+        this.bookISBN = ISBN;
         this.borrowDate = java.time.LocalDate.now();
         this.returnDate = borrowDate.plusDays(5);
         this.activeBorrow = true;
     }
 
 
-    public void setBorrowedBook(Book borrowedBook) {
-        this.borrowedBook = borrowedBook;
+    public void setBookISBN(String bookISBN) {
+        this.bookISBN = bookISBN;
     }
 
-    public Book getBorrowedBook() {
-        return borrowedBook;
+    public String getBookISBN() {
+        return bookISBN;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
     public void setBorrowDate(LocalDate borrowDate) {

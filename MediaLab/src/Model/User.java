@@ -31,7 +31,7 @@ public class User implements Serializable{
             }
             if (count < 2){
                 if (book.getCopies() > 0){
-                    BorrowedBooks b = new BorrowedBooks(this, book);
+                    BorrowedBooks b = new BorrowedBooks(this.username, book.getISBN()); //???
                     this.borrowedBooks.add(b);
                     LibraryManager.getAllBorrowedBooks().add(b);
                     //return "You have succesfully borrowed" + book.getTitle(); Must goooooooooooooooooooooooooo
@@ -52,8 +52,8 @@ public class User implements Serializable{
 
     public void rateBook(Book book, int rating){
         for (BorrowedBooks b : this.borrowedBooks){
-            if (b.getBorrowedBook().getISBN().equals(book.getISBN())){
-                book.createRating(this, rating);
+            if (b.getBookISBN().equals(book.getISBN())){
+                book.createRating(this.username, rating);
             }
         }
         
@@ -121,8 +121,8 @@ public class User implements Serializable{
 
     public void reviewBook(Book book, String review){
         for (BorrowedBooks b : this.borrowedBooks){
-            if (b.getBorrowedBook().getISBN() == book.getISBN()){
-                book.createReview(this, review);
+            if (b.getBookISBN() == book.getISBN()){
+                book.createReview(this.username, review);
             }
         }
         

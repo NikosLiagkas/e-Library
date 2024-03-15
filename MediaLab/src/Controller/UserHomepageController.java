@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Model.Book;
+import Model.LibraryManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,8 +22,7 @@ public class UserHomepageController implements Initializable{
         bookObservableList = FXCollections.observableArrayList();    
         
         bookObservableList.addAll(
-            new Book("book1", "Nik", "Liagito", "1234", 1936, "greek", 5),
-            new Book("book2", "null", "null", "null", 0, "null", 0)
+            LibraryManager.allBooks
         );
     }
      @Override

@@ -12,7 +12,7 @@ public class Admin extends User {
     //create a book
     public void createBook(String title, String author, String publisher, String ISBN, int release_year, 
     String language, int copies, Category category){
-        Book b = new Book(title, author, publisher, ISBN, release_year, language, copies);
+        Book b = new Book(title, author, publisher, ISBN, release_year, copies);
         LibraryManager.getAllBooks().add(b);
 
         List<Category> c = LibraryManager.getAllCategories();
@@ -27,17 +27,25 @@ public class Admin extends User {
     //delete a book
     public void deleteBook(Book delBook){
         for (Book b : LibraryManager.allBooks){
-            if (delBook.equals(b)){LibraryManager.allBooks.remove(b);}
+            if (delBook.equals(b)) {
+                LibraryManager.allBooks.remove(b);
+            }
         }
 
         for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
-            if (delBook.equals(bb.getBorrowedBook())){LibraryManager.allBorrowedBooks.remove(bb);}
+            if (delBook.getISBN().equals(bb.getBookISBN())) {
+                LibraryManager.allBorrowedBooks.remove(bb);
+            }
         }
         
         //might be unnecessary
         for (User user : LibraryManager.allUsers){
             for (BorrowedBooks userbb : user.getBorrowedBooks()){
-                if (delBook.equals(userbb.getBorrowedBook())){user.getBorrowedBooks().remove(userbb);}
+                if (delBook.getISBN().equals(userbb.getBookISBN())) {
+                    List<BorrowedBooks> bb = user.getBorrowedBooks();
+                    bb.remove(userbb);
+                    user.setBorrowedBooks(bb);
+                }
             }
         }
     }
@@ -61,10 +69,6 @@ public class Admin extends User {
 
     public void changeBookReleaseYear(Book book, int newReleaseYear){
         book.setRelease_year(newReleaseYear);
-    }
-
-    public void changeBookLanguage(Book book, String newLanguage){
-        book.setLanguage(newLanguage);
     }
 
     public void changeBookCopies(Book book, int newCopies){
@@ -133,7 +137,7 @@ public class Admin extends User {
     //deletion of a user
     public void deleteUser(User delUser){
         for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
-            if (bb.getUser().equals(delUser)){
+            if (bb.getUsername().equals(delUser.getUsername())){
                 LibraryManager.allBorrowedBooks.remove(bb);
             }
         }
@@ -158,10 +162,10 @@ public class Admin extends User {
     }
       
     //terminate borrows
-    public void TerminateBorrow(User user, Book borrowedBook){
+    public void TerminateBorrow(String username, Book borrowedBook){
         List<BorrowedBooks> activeBorrows = seeAllActiveBorrows();
         for (BorrowedBooks bb : activeBorrows){
-            if (bb.getUser().equals(user) && bb.getBorrowedBook().equals(borrowedBook)){
+            if (bb.getUsername().equals(username) && bb.getBookISBN().equals(borrowedBook.getISBN())){
                 bb.setActiveBorrow(false);
                 int c = borrowedBook.getCopies() + 1;
                 borrowedBook.setCopies(c);

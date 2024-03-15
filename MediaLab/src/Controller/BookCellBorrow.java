@@ -5,7 +5,6 @@ import java.io.IOException;
 import Model.Book;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -38,6 +37,7 @@ public class BookCellBorrow extends ListCell<Book> {
 
     @FXML
     void openBookInfo(MouseEvent event) {
+        BookInfoController.setSaveBook(getItem());
         GeneralController.loadTemplatePage("/View/book_info.fxml");
     }
 
@@ -65,7 +65,7 @@ public class BookCellBorrow extends ListCell<Book> {
 
             }
             Hbox.prefWidthProperty().bind(getListView().widthProperty());
-            
+
             title.setText(book.getTitle());
             author.setText(book.getAuthor());
             isbn.setText(book.getISBN());

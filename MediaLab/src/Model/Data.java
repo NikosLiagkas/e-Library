@@ -57,6 +57,11 @@ public class Data {
             System.out.println("Class not found");
             c.printStackTrace();
         }
-        return objectList;
+
+        if (objectList == null) {
+            return (new ArrayList<>());
+        }
+        else{
+        return objectList;}
     }
 }

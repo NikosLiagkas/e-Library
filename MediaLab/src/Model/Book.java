@@ -10,20 +10,17 @@ public class Book implements Serializable{
     private String publisher;
     private String ISBN;
     private int release_year;
-    private String language;
     private int copies;
     private double avgRating;
     private List<Reviews> reviews;
     private List<Ratings> ratings;
 
-    public Book(String title, String author, String publisher, String ISBN, int release_year, 
-                String language, int copies){
+    public Book(String title, String author, String publisher, String ISBN, int release_year, int copies){
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.ISBN = ISBN;
         this.release_year = release_year;
-        this.language = language;
         this.copies = copies;
         this.avgRating = 0;
         this.reviews = new ArrayList<>();
@@ -83,14 +80,6 @@ public class Book implements Serializable{
         return release_year;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
     public void setCopies(int copies) {
         this.copies = copies;
     }
@@ -124,11 +113,11 @@ public class Book implements Serializable{
     }
 
     public class Ratings {
-        private User user;
+        private String username;
         private int rating;
     
-        public Ratings(User user, int rating){
-            this.user = user;
+        public Ratings(String username, int rating){
+            this.username = username;
             this.rating = rating;
 
         }
@@ -141,21 +130,20 @@ public class Book implements Serializable{
             return rating;
         }
 
-        public void setUser(User user) {
-            this.user = user;
+        public void setUsername(String username) {
+            this.username = username;
         }
-
-        public User getUser() {
-            return user;
+        public String getUsername() {
+            return username;
         }
     }
 
     public class Reviews {
-        private User user;
+        private String username;
         private String review;
     
-        public Reviews(User user, String review){
-            this.user = user;
+        public Reviews(String username, String review){
+            this.username = username;
             this.review = review;
         }
 
@@ -167,21 +155,21 @@ public class Book implements Serializable{
             return review;
         }
 
-        public void setUser(User user) {
-            this.user = user;
+        public void setUsername(String username) {
+            this.username = username;
         }
 
-        public User getUser() {
-            return user;
+        public String getUsername() {
+            return username;
         }
     }
     
 
-    public void createRating(User user, int rating){
+    public void createRating(String username, int rating){
         
        // try {
             for (Ratings r : this.ratings){
-                if (r.user.equals(user)){
+                if (r.username.equals(username)){
                     if (rating>0 && rating<6){
                         r.setRating(rating);
                         change_avgRating();
@@ -193,7 +181,7 @@ public class Book implements Serializable{
                 }
             }
             if (rating>0 && rating<6){
-                    Ratings rate = new Ratings(user, rating);
+                    Ratings rate = new Ratings(username, rating);
                     this.ratings.add(rate);
             }
       /*  }
@@ -202,8 +190,8 @@ public class Book implements Serializable{
         }*/
     }
 
-    public void createReview(User user, String review){
-        Reviews r = new Reviews(user, review);
+    public void createReview(String username, String review){
+        Reviews r = new Reviews(username, review);
         this.reviews.add(r);
     }
 

@@ -7,9 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
-public class BookCellRateReview {
+public class BookCellRateReview extends ListCell<Book>{
+    private FXMLLoader mLLoader;
 
     @FXML
     private Label author;
@@ -32,6 +35,19 @@ public class BookCellRateReview {
     @FXML
     private Label title;
 
+    
+    @FXML
+    void openBookInfo(MouseEvent event) {
+        BookInfoController.setSaveBook(getItem());
+        GeneralController.loadTemplatePage("/View/book_info.fxml");
+    }
+
+    @FXML
+    void openRateReview(MouseEvent event) {
+        RateReviewController.setSaveBook(getItem());
+        GeneralController.loadTemplatePage("/View/book_rate_review.fxml");
+    }
+
     @Override
     protected void updateItem(Book book, boolean empty) {
         super.updateItem(book, empty);
@@ -43,7 +59,7 @@ public class BookCellRateReview {
 
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("/View/cell_book_simple.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/View/cell_book_ratereview.fxml"));
                 mLLoader.setController(this);
 
                 try {
@@ -53,14 +69,14 @@ public class BookCellRateReview {
                 }
 
             }
-            Hbox.prefWidthProperty().bind(getListView().widthProperty());
+            hbox.prefWidthProperty().bind(getListView().widthProperty());
             title.setText(book.getTitle());
             author.setText(book.getAuthor());
-            ISBN.setText(book.getISBN());
+            isbn.setText(book.getISBN());
             rating.setText(String.valueOf(book.getAvgRating()));
 
             setText(null);
-            setGraphic(Hbox);
+            setGraphic(hbox);
 
         }
 
