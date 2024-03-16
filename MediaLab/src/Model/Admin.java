@@ -7,6 +7,7 @@ public class Admin extends User {
        
     public Admin(String username, String password, String FirstName, String LastName, String IDnumber, String email){
         super(username, password, FirstName, LastName, IDnumber, email);
+        super.setIsAdmin(true);
     }
 
     //create a book

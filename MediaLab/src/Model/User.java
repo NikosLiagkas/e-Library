@@ -11,6 +11,7 @@ public class User implements Serializable{
     private String IDnumber;
     private String email;
     private List<BorrowedBooks> borrowedBooks;
+    private boolean isAdmin;
 
     public User(String username, String password, String FirstName, String LastName, String IDnumber, String email){
         this.username = username;
@@ -20,6 +21,7 @@ public class User implements Serializable{
         this.IDnumber = IDnumber;
         this.email = email;
         this.borrowedBooks = new ArrayList<>();
+        this.isAdmin = false;
     }
 
 
@@ -184,4 +186,12 @@ public class User implements Serializable{
         return borrowedBooks;
     }
 
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
 }
+

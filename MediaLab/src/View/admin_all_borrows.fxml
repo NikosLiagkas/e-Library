@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #CEDFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminBorrowsController">
+   <children>
+      <Label alignment="TOP_CENTER" prefHeight="42.0" prefWidth="600.0" text="Manage Borrows" AnchorPane.bottomAnchor="306.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <ListView fx:id="allBorrowsList" blendMode="MULTIPLY" layoutX="15.2" layoutY="47.2" prefHeight="288.0" prefWidth="570.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="47.0" />
+   </children>
+   <effect>
+      <ColorAdjust saturation="-0.3" />
+   </effect>
+</AnchorPane>

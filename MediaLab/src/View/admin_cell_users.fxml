@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="Hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="76.0" prefWidth="425.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="username" prefHeight="22.0" prefWidth="416.0" text="username">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="firstname" prefHeight="18.0" prefWidth="413.0" text="FirstName" />
+            <Label fx:id="lastname" prefHeight="18.0" prefWidth="414.0" text="LastName" />
+            <Label fx:id="idNum" prefHeight="18.0" prefWidth="414.0" text="IDnumber" />
+         </children>
+      </VBox>
+      <Button fx:id="modifyButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#openModifyUser" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Modify">
+         <HBox.margin>
+            <Insets right="15.0" top="20.0" />
+         </HBox.margin>
+         <effect>
+            <ColorAdjust saturation="0.75" />
+         </effect>
+      </Button>
+      <Button fx:id="deleteButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#deleteUser" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF0000;" text="Delete">
+         <HBox.margin>
+            <Insets right="25.0" top="20.0" />
+         </HBox.margin>
+         <effect>
+            <ColorAdjust saturation="0.75" />
+         </effect>
+      </Button>
+   </children>
+</HBox>

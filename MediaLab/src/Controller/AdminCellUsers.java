@@ -1,0 +1,84 @@
+package Controller;
+
+import java.io.IOException;
+
+import Model.User;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+
+public class AdminCellUsers extends ListCell<User> {
+    private FXMLLoader mLLoader;
+
+    @FXML
+    private HBox Hbox;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Label firstname;
+
+    @FXML
+    private Label idNum;
+
+    @FXML
+    private Label lastname;
+
+    @FXML
+    private Button modifyButton;
+
+    @FXML
+    private Label username;
+
+    @FXML
+    void deleteUser(MouseEvent event) {
+
+    }
+
+    @FXML
+    void openModifyUser(MouseEvent event) {
+        AdminModifyUserController.setSaveUser(getItem());
+        GeneralController.loadTemplatePage("/View/admin_modify_user.fxml");
+    }
+
+    @Override
+    protected void updateItem(User user, boolean empty) {
+        super.updateItem(user, empty);
+
+        if(empty || user == null) {
+
+            setText(null);
+            setGraphic(null);
+
+        } else {
+            if (mLLoader == null) {
+                mLLoader = new FXMLLoader(getClass().getResource("/View/admin_cell_users.fxml"));
+                mLLoader.setController(this);
+
+                try {
+                    mLLoader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            Hbox.prefWidthProperty().bind(getListView().widthProperty());
+
+            username.setText(user.getUsername());
+            firstname.setText(user.getFirstName());
+            lastname.setText(user.getLastName());
+            idNum.setText(user.getIDnumber());
+
+
+            setText(null);
+            setGraphic(Hbox);
+
+        }
+
+    }
+}

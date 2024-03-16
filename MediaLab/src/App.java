@@ -31,8 +31,16 @@ public class App extends Application{
 
     @Override
     public void start(Stage primaryStage) {
+        LibraryManager.allCategories.get(0).setCatBooks(LibraryManager.allBooks);
         GeneralController.setStage(primaryStage);
-        GeneralController.loadPage("/View/user_template.fxml");
+        GeneralController.loadPage("/View/admin_template.fxml");
+
+        /*
+        LibraryManager.allAdmins = new ArrayList<>();
+        LibraryManager.allBooks = new ArrayList<>();
+        LibraryManager.allBorrowedBooks = new ArrayList<>();
+        LibraryManager.allCategories = new ArrayList<>();
+        LibraryManager.allUsers = new ArrayList<>();
 
         Book b1 = new Book("book1", "Nik", "Liagito", "1234", 1936, 5);
         Book b2 = new Book("book2", "John", "Portys", "8945", 2000,  2);
@@ -50,6 +58,8 @@ public class App extends Application{
         LibraryManager.allCategories.add(category2);
         LibraryManager.allBorrowedBooks.add(bb);
 
+        Platform.exit();
+         */
 
     }
 

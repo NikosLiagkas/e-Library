@@ -9,7 +9,7 @@ public class LibraryManager {
     public static List<BorrowedBooks> allBorrowedBooks;
     public static List<User> allUsers;
     public static List<Category> allCategories;
-    public static User loggedUser = new User("nikos", "null", "null", "null", "null", "null");
+    public static User loggedUser = new Admin("TheAdmin", "admin1234", "John", "Orfan", "AM987654", "admin@gmail.com");
 
     public static void retrieveData(){
         allAdmins = Data.deserialize("src/medialab/admin.ser");
@@ -25,6 +25,45 @@ public class LibraryManager {
         Data.serialize("src/medialab/borrowedbooks.ser", allBorrowedBooks);
         Data.serialize("src/medialab/category.ser", allCategories);
         Data.serialize("src/medialab/user.ser", allUsers);
+    }
+
+    public static Book findBook(String isbn) {
+        for (Book book : allBooks) {
+            if (book.getISBN().equals(isbn)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public static User findUser(String username) {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public static Category findCategory(String catName) {
+        for (Category cat : allCategories) {
+            if (cat.getCategory().equals(catName)) {
+                return cat;
+            }
+        }
+        return null;
+    }
+
+    //to get admin instance from logged user
+    public static Admin getAdmin(User loggedUser) {
+        if (loggedUser.getIsAdmin() == true) {
+            for (Admin admin : allAdmins) {
+                if ( loggedUser.getUsername().equals(admin.getUsername()) && loggedUser.getIDnumber().equals(admin.getIDnumber()) ) {
+                    return admin;
+                }
+            }
+        }
+        return null;
     }
 
     public static void setAllAdmins(List<Admin> allAdmins) {
