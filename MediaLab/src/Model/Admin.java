@@ -124,7 +124,7 @@ public class Admin extends User {
         }
     }
 
-    public void changeCategoryName(Category category, String newCategoryName){
+    public void changeCategoryName(Category category, String newCategoryName) throws NotUniqueException{
         category.setCategory(newCategoryName);
     }
 

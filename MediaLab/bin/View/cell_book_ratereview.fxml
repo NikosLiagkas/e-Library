@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="76.0" prefWidth="414.0" HBox.hgrow="ALWAYS">
          <children>
@@ -20,11 +20,41 @@
             <Label fx:id="author" prefHeight="18.0" prefWidth="413.0" text="Author" />
             <Label fx:id="isbn" prefHeight="18.0" prefWidth="414.0" text="ISBN" />
             <Label fx:id="rating" prefHeight="18.0" prefWidth="414.0" text="Rating (Number of Users that Rated)" />
+            <HBox>
+               <children>
+                  <Label prefHeight="18.0" prefWidth="100.0" text="Borrow Date : " />
+                  <Label fx:id="borrowDate" text="getBorrowDate">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label prefHeight="18.0" prefWidth="100.0" text="Return Date  :" />
+                  <Label fx:id="returnDate" text="getReturnDate">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="rating1" prefHeight="18.0" prefWidth="100.0" text="Active           :" />
+                  <Label fx:id="isBorrowActive" prefHeight="18.0" prefWidth="59.0" text="yes or no">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </VBox>
       <Button fx:id="bookDetailsButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#openBookInfo" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Details">
          <HBox.margin>
-            <Insets right="15.0" top="20.0" />
+            <Insets right="15.0" top="40.0" />
          </HBox.margin>
          <effect>
             <ColorAdjust saturation="0.75" />
@@ -32,7 +62,7 @@
       </Button>
       <Button fx:id="reviewButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#openRateReview" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Review">
          <HBox.margin>
-            <Insets right="20.0" top="20.0" />
+            <Insets right="20.0" top="40.0" />
          </HBox.margin>
          <effect>
             <ColorAdjust saturation="0.75" />

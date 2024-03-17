@@ -30,9 +30,9 @@
             <ColorAdjust saturation="0.75" />
          </effect>
       </Button>
-      <Button fx:id="borrowButton" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Borrow">
+      <Button fx:id="borrowButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#borrowBook" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Borrow">
          <HBox.margin>
-            <Insets top="20.0" />
+            <Insets right="25.0" top="20.0" />
          </HBox.margin>
          <effect>
             <ColorAdjust saturation="0.75" />

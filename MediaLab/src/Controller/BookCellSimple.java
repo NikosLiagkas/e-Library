@@ -52,7 +52,7 @@ public class BookCellSimple extends ListCell<Book> {
             title.setText(book.getTitle());
             author.setText(book.getAuthor());
             ISBN.setText(book.getISBN());
-            rating.setText(String.valueOf(book.getAvgRating()));
+            rating.setText(String.valueOf(book.getAvgRating() + "  (Rated by " + book.getRatings().size() + " Users)"));
 
             setText(null);
             setGraphic(Hbox);

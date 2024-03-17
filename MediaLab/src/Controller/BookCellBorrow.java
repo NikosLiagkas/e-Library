@@ -2,9 +2,14 @@ package Controller;
 
 import java.io.IOException;
 
+import CustomExceptions.BorrowLimitException;
+import CustomExceptions.NoCopiesException;
 import Model.Book;
+import Model.LibraryManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -41,6 +46,19 @@ public class BookCellBorrow extends ListCell<Book> {
         GeneralController.loadTemplatePage("/View/book_info.fxml");
     }
 
+    @FXML
+    void borrowBook(MouseEvent event) {
+        try{
+            LibraryManager.getLoggedUser().borrowBook(getItem());
+            GeneralController.loadTemplatePage("/View/borrows.fxml");
+        }
+        catch (BorrowLimitException | NoCopiesException e) {
+            Alert a = new Alert(AlertType.ERROR);
+            a.setContentText(e.getMessage());
+            a.showAndWait();
+        }
+    }
+
 
 
     @Override
@@ -69,7 +87,7 @@ public class BookCellBorrow extends ListCell<Book> {
             title.setText(book.getTitle());
             author.setText(book.getAuthor());
             isbn.setText(book.getISBN());
-            rating.setText(String.valueOf(book.getAvgRating()));
+            rating.setText(String.valueOf(book.getAvgRating()+ "  (Rated by " + book.getRatings().size() + " Users)"));
 
             
 

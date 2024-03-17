@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import CustomExceptions.NotUniqueException;
+
 public class Category implements Serializable{
     private String category;
     private List<String> catBooksISBN;
@@ -12,7 +14,12 @@ public class Category implements Serializable{
         this.catBooksISBN = new ArrayList<>();
     }
 
-    public void setCategory(String category) {
+    public void setCategory(String category) throws NotUniqueException{
+        for (Category c : LibraryManager.allCategories){
+            if(c.getCategory().equals(category)) {
+                throw new NotUniqueException("Category name already used. Please enter a different category name.");
+            }
+        }
         this.category = category;
     }
 

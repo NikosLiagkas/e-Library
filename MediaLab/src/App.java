@@ -59,7 +59,7 @@ public class App extends Application{
         LibraryManager.allBorrowedBooks.add(bb);
 
         Platform.exit();
-         */
+        */
 
     }
 

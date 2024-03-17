@@ -29,33 +29,28 @@ public class User implements Serializable{
     }
 
 
-    public void borrowBook(Book book){
-        try{
-            int count = 0;
-            for (BorrowedBooks b : this.borrowedBooks){
-                if (b.getActiveBorrow()==true) {count++;}
+    public void borrowBook(Book book) throws NoCopiesException, BorrowLimitException{
+        
+        int count = 0;
+        for (BorrowedBooks b : this.borrowedBooks){
+            if (b.getActiveBorrow()==true) {
+                count++;
             }
-            if (count < 2){
-                if (book.getCopies() > 0){
-                    BorrowedBooks b = new BorrowedBooks(this.username, book.getISBN()); //???
-                    this.borrowedBooks.add(b);
-                    LibraryManager.getAllBorrowedBooks().add(b);
-                    //return "You have succesfully borrowed" + book.getTitle(); Must goooooooooooooooooooooooooo
-                }
-                else {
-                    throw new NoCopiesException(); 
-                }
+        }
+        if (count < 2){
+            if (book.getCopies() > 0){
+                BorrowedBooks b = new BorrowedBooks(this.username, book.getISBN()); //???
+                this.borrowedBooks.add(b);
+                LibraryManager.getAllBorrowedBooks().add(b);
+                //return "You have succesfully borrowed" + book.getTitle(); Must goooooooooooooooooooooooooo
             }
             else {
-                throw new BorrowLimitException();
+                throw new NoCopiesException(); 
             }
         }
-        catch(NoCopiesException c){
-            c.printStackTrace();
+        else {
+            throw new BorrowLimitException();
         }
-        catch(BorrowLimitException b){
-            b.printStackTrace();
-        } 
     }
 
 
