@@ -1,6 +1,9 @@
 package Model;
 
 import java.util.List;
+
+import CustomExceptions.NotFoundException;
+
 import java.io.File;
 
 public class LibraryManager {
@@ -27,35 +30,35 @@ public class LibraryManager {
         Data.serialize("src/medialab/user.ser", allUsers);
     }
 
-    public static Book findBook(String isbn) {
+    public static Book findBook(String isbn) throws NotFoundException {
         for (Book book : allBooks) {
             if (book.getISBN().equals(isbn)) {
                 return book;
             }
         }
-        return null;
+        throw new NotFoundException("Book Not Found.");
     }
 
-    public static User findUser(String username) {
+    public static User findUser(String username) throws NotFoundException {
         for (User user : allUsers) {
             if (user.getUsername().equals(username)) {
                 return user;
             }
         }
-        return null;
+        throw new NotFoundException("User Not Found.");
     }
 
-    public static Category findCategory(String catName) {
+    public static Category findCategory(String catName) throws NotFoundException {
         for (Category cat : allCategories) {
             if (cat.getCategory().equals(catName)) {
                 return cat;
             }
         }
-        return null;
+        throw new NotFoundException("Category Not Found.");
     }
 
     //to get admin instance from logged user
-    public static Admin getAdmin(User loggedUser) {
+    public static Admin getAdmin(User loggedUser) throws NotFoundException {
         if (loggedUser.getIsAdmin() == true) {
             for (Admin admin : allAdmins) {
                 if ( loggedUser.getUsername().equals(admin.getUsername()) && loggedUser.getIDnumber().equals(admin.getIDnumber()) ) {
@@ -63,8 +66,24 @@ public class LibraryManager {
                 }
             }
         }
-        return null;
+        throw new NotFoundException("Admin Not Found.");
     }
+
+
+    public static List<Book> top5books(){
+        List<Book> top5books = allBooks;
+        top5books.sort((b1, b2) -> Double.compare(b1.getAvgRating(), b2.getAvgRating()) );
+        top5books.reversed();
+
+        if (top5books.size() < 5){
+            return top5books;
+        }
+        else {
+            return top5books.subList(0, 5);
+        }
+    }
+
+
 
     public static void setAllAdmins(List<Admin> allAdmins) {
         LibraryManager.allAdmins = allAdmins;

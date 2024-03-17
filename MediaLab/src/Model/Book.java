@@ -3,6 +3,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import CustomExceptions.InvalidRatingException;
+import CustomExceptions.NotUniqueException;
+
 public class Book implements Serializable{
 
     private String title;
@@ -64,7 +67,12 @@ public class Book implements Serializable{
         return publisher;
     }
 
-    public void setISBN(String iSBN) {
+    public void setISBN(String iSBN) throws NotUniqueException{
+        for (Book b : LibraryManager.allBooks){
+           if (b.getISBN().equals(iSBN)){
+                throw new NotUniqueException("ISBN already taken. Please enter a unique ISBN.");
+            }
+        }
         ISBN = iSBN;
     }
 
@@ -167,7 +175,7 @@ public class Book implements Serializable{
 
     public void createRating(String username, int rating){
         
-       // try {
+        try {
             for (Ratings r : this.ratings){
                 if (r.username.equals(username)){
                     if (rating>0 && rating<6){
@@ -176,7 +184,7 @@ public class Book implements Serializable{
                         return;
                     }      
                     else {
-                        //throw new InvalidRatingException();
+                        throw new InvalidRatingException();
                     }          
                 }
             }
@@ -184,10 +192,10 @@ public class Book implements Serializable{
                     Ratings rate = new Ratings(username, rating);
                     this.ratings.add(rate);
             }
-      /*  }
+        }
         catch(InvalidRatingException i) {
-            //System.out.println("Invalid Rating. Please rate the book 1 through 5."); must goooooooo????
-        }*/
+            i.printStackTrace();
+        }
     }
 
     public void createReview(String username, String review){

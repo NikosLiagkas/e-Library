@@ -3,6 +3,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import CustomExceptions.BorrowLimitException;
+import CustomExceptions.NoCopiesException;
+import CustomExceptions.NotUniqueException;
+
 public class User implements Serializable{
     private String username;
     private String password;
@@ -26,7 +30,7 @@ public class User implements Serializable{
 
 
     public void borrowBook(Book book){
-        //try{
+        try{
             int count = 0;
             for (BorrowedBooks b : this.borrowedBooks){
                 if (b.getActiveBorrow()==true) {count++;}
@@ -38,29 +42,24 @@ public class User implements Serializable{
                     LibraryManager.getAllBorrowedBooks().add(b);
                     //return "You have succesfully borrowed" + book.getTitle(); Must goooooooooooooooooooooooooo
                 }
-                else {/*throw new NoCopiesException(); */}
+                else {
+                    throw new NoCopiesException(); 
+                }
             }
-            else 
-        {/*throw new BorrowLimitException();*/}
-       /* }
+            else {
+                throw new BorrowLimitException();
+            }
+        }
         catch(NoCopiesException c){
             c.printStackTrace();
         }
         catch(BorrowLimitException b){
             b.printStackTrace();
-        } */
+        } 
     }
 
 
-    public void rateBook(Book book, int rating){
-        for (BorrowedBooks b : this.borrowedBooks){
-            if (b.getBookISBN().equals(book.getISBN())){
-                book.createRating(this.username, rating);
-            }
-        }
-        
-    }
-
+    // Search Book and Combined Searches
     public List<Book> searchBookByTitle(String search){
         List<Book> matches = new ArrayList<>();
         for (Book b : LibraryManager.allBooks){
@@ -121,6 +120,15 @@ public class User implements Serializable{
         return (matches);     
     }
 
+    public void rateBook(Book book, int rating){
+        for (BorrowedBooks b : this.borrowedBooks){
+            if (b.getBookISBN().equals(book.getISBN())){
+                book.createRating(this.username, rating);
+            }
+        }
+        
+    }
+
     public void reviewBook(Book book, String review){
         for (BorrowedBooks b : this.borrowedBooks){
             if (b.getBookISBN() == book.getISBN()){
@@ -130,7 +138,12 @@ public class User implements Serializable{
         
     }
     
-    public void setUsername(String username) {
+    public void setUsername(String username) throws NotUniqueException{
+        for (User u : LibraryManager.allUsers){
+           if (u.getUsername().equals(username)){
+                throw new NotUniqueException("Username already taken. Please choose another one.");
+            }
+        }
         this.username = username;
     }
 
@@ -162,7 +175,12 @@ public class User implements Serializable{
         return LastName;
     }
 
-    public void setIDnumber(String iDnumber) {
+    public void setIDnumber(String iDnumber) throws NotUniqueException {
+        for (User u : LibraryManager.allUsers){
+            if (u.getIDnumber().equals(iDnumber)){
+                throw new NotUniqueException("ID number already taken. Please enter a unique ID number.");
+            }
+        }
         IDnumber = iDnumber;
     }
 
@@ -170,7 +188,12 @@ public class User implements Serializable{
         return IDnumber;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws NotUniqueException { 
+        for (User u : LibraryManager.allUsers){
+            if (u.getEmail().equals(email)){
+                throw new NotUniqueException("Email already taken. Please enter a unique Email.");
+            }
+        }    
         this.email = email;
     }
 

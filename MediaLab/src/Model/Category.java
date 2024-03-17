@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Category implements Serializable{
     private String category;
-    private List<Book> catBooks;
+    private List<String> catBooksISBN;
 
     public Category(String category){
         this.category = category;
-        this.catBooks = new ArrayList<>();
+        this.catBooksISBN = new ArrayList<>();
     }
 
     public void setCategory(String category) {
@@ -20,12 +20,12 @@ public class Category implements Serializable{
         return category;
     }
 
-    public void setCatBooks(List<Book> catBooks) {
-        this.catBooks = catBooks;
+    public void setCatBooksISBN(List<String> catBooks) {
+        this.catBooksISBN = catBooks;
     }
 
-    public List<Book> getCatBooks() {
-        return catBooks;
+    public List<String> getCatBooksISBN() {
+        return catBooksISBN;
     }
     
 }

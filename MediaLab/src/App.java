@@ -31,9 +31,9 @@ public class App extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-        LibraryManager.allCategories.get(0).setCatBooks(LibraryManager.allBooks);
+        
         GeneralController.setStage(primaryStage);
-        GeneralController.loadPage("/View/admin_template.fxml");
+        GeneralController.loadPage("/View/user_template.fxml");
 
         /*
         LibraryManager.allAdmins = new ArrayList<>();
