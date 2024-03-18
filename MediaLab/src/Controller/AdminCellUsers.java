@@ -2,9 +2,14 @@ package Controller;
 
 import java.io.IOException;
 
+import CustomExceptions.NotFoundException;
+import Model.Admin;
+import Model.LibraryManager;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -37,7 +42,19 @@ public class AdminCellUsers extends ListCell<User> {
 
     @FXML
     void deleteUser(MouseEvent event) {
-
+        try{
+            Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
+            admin.deleteUser(getItem());
+            Alert a = new Alert(AlertType.INFORMATION);
+            a.setContentText(" User succesfully deleted.");
+            a.setOnCloseRequest(s -> {
+                GeneralController.loadTemplatePage("/View/admin_all_users.fxml");
+            });
+            a.showAndWait();
+        }
+        catch (NotFoundException e) {
+            //will never happen
+        }
     }
 
     @FXML

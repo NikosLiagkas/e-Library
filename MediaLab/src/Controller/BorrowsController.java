@@ -3,7 +3,6 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Model.Book;
 import Model.BorrowedBooks;
 import Model.LibraryManager;
 import javafx.collections.FXCollections;
@@ -29,7 +28,7 @@ public class BorrowsController implements Initializable{
         activeObservableList = FXCollections.observableArrayList();
         historyObservableList = FXCollections.observableArrayList();    
         
-        for (BorrowedBooks bb : LibraryManager.allBorrowedBooks) {
+        for (BorrowedBooks bb : LibraryManager.getUsersBorrowedBooks(LibraryManager.getLoggedUser().getUsername())) {
             if (bb.getActiveBorrow()==true) {
                 activeObservableList.add(bb);
             }

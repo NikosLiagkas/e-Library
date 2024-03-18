@@ -30,7 +30,7 @@
             <ColorAdjust saturation="0.75" />
          </effect>
       </Button>
-      <Button fx:id="deleteButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#deleteBook" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF0000;" text="Delete">
+      <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteBook" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF0000;" text="Delete">
          <HBox.margin>
             <Insets right="20.0" top="20.0" />
          </HBox.margin>

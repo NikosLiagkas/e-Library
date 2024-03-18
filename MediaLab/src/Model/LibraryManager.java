@@ -1,10 +1,10 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import CustomExceptions.NotFoundException;
 
-import java.io.File;
 
 public class LibraryManager {
     public static List<Admin> allAdmins;
@@ -12,7 +12,8 @@ public class LibraryManager {
     public static List<BorrowedBooks> allBorrowedBooks;
     public static List<User> allUsers;
     public static List<Category> allCategories;
-    public static User loggedUser = new Admin("TheAdmin", "admin1234", "John", "Orfan", "AM987654", "admin@gmail.com");
+    public static User loggedUser;
+    //public static User loggedUser = new User("Nikolios", "123456", "Nikos", "Liagas", "AM123456", "nikos@gmail.com");
 
     public static void retrieveData(){
         allAdmins = Data.deserialize("src/medialab/admin.ser");
@@ -28,6 +29,23 @@ public class LibraryManager {
         Data.serialize("src/medialab/borrowedbooks.ser", allBorrowedBooks);
         Data.serialize("src/medialab/category.ser", allCategories);
         Data.serialize("src/medialab/user.ser", allUsers);
+    }
+
+    public static User login(String username, String password) throws NotFoundException {
+        for (User u : allUsers) {
+            if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+                return u;
+            }
+        }
+
+        for (Admin a : allAdmins) {
+            if (a.getUsername().equals(username) && a.getPassword().equals(password)) {
+                return a;
+            }
+        }
+
+        throw new NotFoundException("False login information. Please try again.");
+        
     }
 
     public static Book findBook(String isbn) throws NotFoundException {
@@ -57,6 +75,28 @@ public class LibraryManager {
         throw new NotFoundException("Category Not Found.");
     }
 
+    public static Category findBookCategory(Book book) throws NotFoundException{
+            for (Category c : allCategories) {
+                if (c.getCatBooksISBN().contains(book.getISBN())) {
+                    return c;
+                }
+            } 
+            throw new NotFoundException("Category Not Found");
+    }
+
+
+    public static List<Book> findCatBooks(List<String> catBooksISBN) {
+        List<Book> catBooks = new ArrayList<>();
+        for (Book b : allBooks) {
+            for (String isbn : catBooksISBN) {
+                if (isbn.equals(b.getISBN())) {
+                    catBooks.add(b);
+                }
+            }
+        }
+        return catBooks;
+    }
+
     //to get admin instance from logged user
     public static Admin getAdmin(User loggedUser) throws NotFoundException {
         if (loggedUser.getIsAdmin() == true) {
@@ -83,7 +123,17 @@ public class LibraryManager {
         }
     }
 
+    public static List<BorrowedBooks> getUsersBorrowedBooks(String username) {
+        List<BorrowedBooks> result = new ArrayList<>();
+        
+        for (BorrowedBooks bb : allBorrowedBooks) {
+            if (bb.getUsername().equals(username)) {
+                result.add(bb);
+            }
+        }
 
+        return result;
+    }
 
     public static void setAllAdmins(List<Admin> allAdmins) {
         LibraryManager.allAdmins = allAdmins;

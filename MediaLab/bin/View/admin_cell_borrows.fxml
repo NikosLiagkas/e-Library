@@ -57,7 +57,7 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="terminateButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#terminateBorrow" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: #FF0000;" text="Terminate Borrow">
+      <Button fx:id="terminateButton" mnemonicParsing="false" onMouseClicked="#terminateBorrow" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: #FF0000;" text="Terminate Borrow">
          <HBox.margin>
             <Insets right="15.0" top="20.0" />
          </HBox.margin>

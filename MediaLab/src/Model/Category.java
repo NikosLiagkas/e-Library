@@ -23,6 +23,10 @@ public class Category implements Serializable{
         this.category = category;
     }
 
+    public void addBookToCategory(String ISBN) {
+        this.catBooksISBN.add(ISBN);
+    } 
+
     public String getCategory() {
         return category;
     }

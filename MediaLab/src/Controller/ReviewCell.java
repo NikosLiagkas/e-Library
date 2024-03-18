@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.IOException;
 
-import Model.Book;
 import Model.Book.Reviews;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,8 +44,8 @@ public class ReviewCell extends ListCell<Reviews> {
 
             }
             Hbox.prefWidthProperty().bind(getListView().widthProperty());
-            //user.setText(rev.getUsername());
-            //review.setText(rev.getReview());
+            user.setText(rev.getUsername());
+            review.setText(rev.getReview());
 
             setText(null);
             setGraphic(Hbox);

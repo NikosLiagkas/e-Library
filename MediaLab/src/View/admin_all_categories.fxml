@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #CEDFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminCategoriesController">
    <children>
-      <Label alignment="TOP_CENTER" prefHeight="42.0" prefWidth="600.0" text="Manage Categories" AnchorPane.bottomAnchor="306.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label alignment="TOP_CENTER" prefHeight="42.0" prefWidth="600.0" text="Manage Categories" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
@@ -22,7 +22,7 @@
          </font>
       </Label>
       <TextField fx:id="categoryField" layoutX="15.0" layoutY="55.0" prefHeight="26.0" prefWidth="393.0" promptText="New Category Name" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="192.0" />
-      <Button fx:id="createButton" layoutX="473.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#createCategory" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #87A2C0;" text="Create" AnchorPane.rightAnchor="15.0">
+      <Button fx:id="createButton" layoutX="445.0" layoutY="55.0" mnemonicParsing="false" onMouseClicked="#createCategory" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #87A2C0;" text="Create" AnchorPane.rightAnchor="15.0">
          <effect>
             <ColorAdjust saturation="0.75" />
          </effect>

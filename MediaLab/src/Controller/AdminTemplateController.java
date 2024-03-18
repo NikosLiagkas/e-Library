@@ -74,5 +74,6 @@ public class AdminTemplateController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         GeneralController.setTemplate(template);
+        GeneralController.loadTemplatePage("/View/admin_all_books.fxml");
     }
 }

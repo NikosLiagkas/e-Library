@@ -18,7 +18,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TextField prefHeight="26.0" prefWidth="388.0" promptText="Change Category Name">
+            <TextField fx:id="changeCatNameField" prefHeight="26.0" prefWidth="388.0" promptText="Change Category Name">
                <VBox.margin>
                   <Insets right="30.0" />
                </VBox.margin>
@@ -33,7 +33,7 @@
             <ColorAdjust saturation="0.75" />
          </effect>
       </Button>
-      <Button fx:id="deleteButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#deleteCategory" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF0000;" text="Delete">
+      <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteCategory" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #FF0000;" text="Delete">
          <HBox.margin>
             <Insets right="25.0" top="25.0" />
          </HBox.margin>

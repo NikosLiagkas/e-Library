@@ -1,17 +1,17 @@
 package Controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import javafx.event.EventHandler;
+import Model.LibraryManager;
+import Model.User;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class SignUpController implements Initializable {
+public class SignUpController {
 
     @FXML
     private Button backButton;
@@ -40,15 +40,69 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField usernameField;
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        
-        backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                GeneralController.loadPage("/View/home.fxml");
-            }
-        });
+    @FXML
+    void SignUp(MouseEvent event) {
+        String email = emailField.getText().strip();
+        String FirstName = firstNameField.getText().strip();
+        String LastName = lastNameField.getText().strip();
+        String username = usernameField.getText().strip();
+        String password = passwordField.getText().strip();
+        String confirmPassword = confirmPasswordField.getText().strip();
+        String IDnum = idNumberField.getText().strip();
 
-    }   
+        
+        if (email.isEmpty() || FirstName.isEmpty() || LastName.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || IDnum.isEmpty()) {
+            Alert a = new Alert(AlertType.ERROR);
+                a.setContentText("Must fill in all fields.");
+                a.showAndWait();
+                return;
+        }
+        else {
+            if (!password.equals(confirmPassword)) {
+                Alert a = new Alert(AlertType.ERROR);
+                a.setContentText("Password and Confirm Password must be the same.");
+                a.showAndWait();
+                return;
+            }
+            for (User u : LibraryManager.allUsers){
+                if (u.getUsername().equals(username)){
+                    Alert a = new Alert(AlertType.ERROR);
+                    a.setContentText("Username already taken. Please choose another one.");
+                    a.showAndWait();
+                    return;
+                }
+            }
+            for (User u : LibraryManager.allUsers){
+                if (u.getIDnumber().equals(IDnum)){
+                    Alert a = new Alert(AlertType.ERROR);
+                    a.setContentText("ID number already taken. Please enter a unique ID number.");
+                    a.showAndWait();
+                    return;
+                }
+            }
+            for (User u : LibraryManager.allUsers){
+                if (u.getEmail().equals(email)){
+                    Alert a = new Alert(AlertType.ERROR);
+                    a.setContentText("Email already taken. Please enter a unique Email.");
+                    a.showAndWait();
+                    return;
+                }
+            }
+
+            User u = new User(username, password, FirstName, LastName, IDnum, email);
+            LibraryManager.allUsers.add(u);
+            Alert a = new Alert(AlertType.ERROR);
+            a.setContentText("Sign up was succesful. You can now login.");
+            a.setOnCloseRequest(s -> {
+                GeneralController.loadPage("/View/home.fxml");
+            });
+            a.showAndWait();
+        }
+    }
+
+    @FXML
+    void openLoginPage(MouseEvent event) {
+        GeneralController.loadPage("/View/home.fxml");
+    }
+  
 }

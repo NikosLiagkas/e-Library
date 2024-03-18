@@ -1,13 +1,12 @@
 package Controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import CustomExceptions.NotFoundException;
 import Model.Admin;
 import Model.BorrowedBooks;
-import Model.Category;
 import Model.LibraryManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,22 +21,29 @@ public class AdminBorrowsController implements Initializable{
 
     private ObservableList<BorrowedBooks> borrBookObservableList;
 
-    public AdminBorrowsController() {
-        borrBookObservableList = FXCollections.observableArrayList();
-
-        List<BorrowedBooks> ActiveBorrowedBooks;
-        Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
-        
-        ActiveBorrowedBooks = admin.seeAllActiveBorrows();
-
-        borrBookObservableList.addAll(
-            ActiveBorrowedBooks
-        );
-
-    }
+    
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        borrBookObservableList = FXCollections.observableArrayList();
+
+        List<BorrowedBooks> ActiveBorrowedBooks;
+        try {
+            Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
+        
+            ActiveBorrowedBooks = admin.seeAllActiveBorrows();
+
+            
+
+            borrBookObservableList.addAll(
+                ActiveBorrowedBooks
+            );
+
+        }
+        catch (NotFoundException e) {
+            
+        }
+
         allBorrowsList.setItems(borrBookObservableList);
         allBorrowsList.setCellFactory(bookListView -> new AdminCellBorrows());
 

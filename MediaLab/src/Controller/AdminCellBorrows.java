@@ -2,13 +2,16 @@ package Controller;
 
 import java.io.IOException;
 
+import CustomExceptions.NotFoundException;
+import Model.Admin;
 import Model.Book;
 import Model.BorrowedBooks;
-import Model.Category;
 import Model.LibraryManager;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -45,7 +48,19 @@ public class AdminCellBorrows extends ListCell<BorrowedBooks>{
 
     @FXML
     void terminateBorrow(MouseEvent event) {
-
+        try{
+            Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
+            admin.TerminateBorrow(getItem());
+            Alert a = new Alert(AlertType.INFORMATION);
+            a.setContentText("Borrow succesfully terminated.");
+            a.setOnCloseRequest(s -> {
+                GeneralController.loadTemplatePage("/View/admin_all_borrows.fxml");
+            });
+            a.showAndWait();
+        }
+        catch (NotFoundException e) {
+            //will never happen
+        }
     }
 
     @Override
@@ -70,12 +85,18 @@ public class AdminCellBorrows extends ListCell<BorrowedBooks>{
 
             }
             Hbox.prefWidthProperty().bind(getListView().widthProperty());
-            Book b = LibraryManager.findBook(bb.getBookISBN());
-            User u = LibraryManager.findUser(bb.getUsername());
-            title.setText(b.getTitle());         
-            username.setText(u.getUsername());
-            borrowDate.setText(String.valueOf(bb.getBorrowDate()));
-            returnDate.setText(String.valueOf(bb.getReturnDate()));
+            
+            try{
+                Book b = LibraryManager.findBook(bb.getBookISBN());
+                User u = LibraryManager.findUser(bb.getUsername());
+                title.setText(b.getTitle());         
+                username.setText(u.getUsername());
+                borrowDate.setText(String.valueOf(bb.getBorrowDate()));
+                returnDate.setText(String.valueOf(bb.getReturnDate()));
+            }
+            catch (NotFoundException e){
+                //will never get thrown 
+            }
             setText(null);
             setGraphic(Hbox);
 

@@ -2,9 +2,14 @@ package Controller;
 
 import java.io.IOException;
 
+import CustomExceptions.NotFoundException;
+import Model.Admin;
 import Model.Book;
+import Model.LibraryManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -38,7 +43,19 @@ public class AdminCellBooks extends ListCell<Book> {
 
     @FXML
     void deleteBook(MouseEvent event) {
-
+        try{
+            Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
+            admin.deleteBook(getItem());
+            Alert a = new Alert(AlertType.INFORMATION);
+            a.setContentText("Book succesfully deleted.");
+            a.setOnCloseRequest(s -> {
+                GeneralController.loadTemplatePage("/View/admin_all_books.fxml");
+            });
+            a.showAndWait();
+        }
+        catch (NotFoundException e) {
+            //will never happen
+        }
     }
 
     @FXML

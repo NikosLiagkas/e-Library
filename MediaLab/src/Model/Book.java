@@ -3,7 +3,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import CustomExceptions.DateException;
 import CustomExceptions.InvalidRatingException;
+import CustomExceptions.NegativeCopiesException;
 import CustomExceptions.NotUniqueException;
 
 public class Book implements Serializable{
@@ -39,7 +41,10 @@ public class Book implements Serializable{
             for (Ratings r : this.ratings){
                 ratingSum += r.rating;
             }
-            this.avgRating = ratingSum / ratings.size();
+            double sum = (double) ratingSum;
+            double s = (double) ratings.size();
+            double avg = sum / s;
+            this.avgRating = Math.round(avg * 100.0) / 100.0;
         }
     }  
     
@@ -67,7 +72,7 @@ public class Book implements Serializable{
         return publisher;
     }
 
-    public void setISBN(String iSBN) throws NotUniqueException{
+    public void setISBN(String iSBN) throws NotUniqueException {
         for (Book b : LibraryManager.allBooks){
            if (b.getISBN().equals(iSBN)){
                 throw new NotUniqueException("ISBN already taken. Please enter a unique ISBN.");
@@ -80,7 +85,10 @@ public class Book implements Serializable{
         return ISBN;
     }
 
-    public void setRelease_year(int release_year) {
+    public void setRelease_year(int release_year) throws DateException {
+        if (release_year > java.time.LocalDate.now().getYear()) {
+            throw new DateException("Invalid Year. Please enter an integer that does not represent a future year.");
+        }
         this.release_year = release_year;
     }
 
@@ -88,7 +96,10 @@ public class Book implements Serializable{
         return release_year;
     }
 
-    public void setCopies(int copies) {
+    public void setCopies(int copies) throws NegativeCopiesException {
+        if (copies < 0) {
+            throw new NegativeCopiesException();
+        }
         this.copies = copies;
     }
 
@@ -120,7 +131,7 @@ public class Book implements Serializable{
         return reviews;
     }
 
-    public class Ratings {
+    public class Ratings implements Serializable{
         private String username;
         private int rating;
     
@@ -146,7 +157,7 @@ public class Book implements Serializable{
         }
     }
 
-    public class Reviews {
+    public class Reviews implements Serializable{
         private String username;
         private String review;
     

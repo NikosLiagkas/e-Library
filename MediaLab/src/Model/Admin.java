@@ -2,6 +2,8 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import CustomExceptions.DateException;
+import CustomExceptions.NegativeCopiesException;
 import CustomExceptions.NotFoundException;
 import CustomExceptions.NotUniqueException;
 import Model.Book.Ratings;
@@ -32,28 +34,22 @@ public class Admin extends User {
 
     //delete a book
     public void deleteBook(Book delBook){
-        for (Book b : LibraryManager.allBooks){
-            if (delBook.equals(b)) {
-                LibraryManager.allBooks.remove(b);
+        List<BorrowedBooks> del = new ArrayList<>();
+        for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
+            if (delBook.getISBN().equals(bb.getBookISBN())) {
+                del.add(bb);
             }
         }
 
-        for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
-            if (delBook.getISBN().equals(bb.getBookISBN())) {
-                LibraryManager.allBorrowedBooks.remove(bb);
-            }
+        for (BorrowedBooks bb : del) {
+            LibraryManager.allBorrowedBooks.remove(bb);
         }
+
+        LibraryManager.allBooks.remove(delBook);
+            
+
         
-        //might be unnecessary
-        for (User user : LibraryManager.allUsers){
-            for (BorrowedBooks userbb : user.getBorrowedBooks()){
-                if (delBook.getISBN().equals(userbb.getBookISBN())) {
-                    List<BorrowedBooks> bb = user.getBorrowedBooks();
-                    bb.remove(userbb);
-                    user.setBorrowedBooks(bb);
-                }
-            }
-        }
+        
     }
 
     //modification of a book
@@ -85,25 +81,33 @@ public class Admin extends User {
             }
         }
 
-        for (User user : LibraryManager.allUsers){
-            for (BorrowedBooks bb : user.getBorrowedBooks()) {
-                if (bb.getBookISBN().equals(book.getISBN())){
-                    bb.setBookISBN(newISBN);
-                }
-            }
-        }
+
     }
 
-    public void changeBookReleaseYear(Book book, int newReleaseYear){
+    public void changeBookReleaseYear(Book book, int newReleaseYear) throws DateException {
         book.setRelease_year(newReleaseYear);
     }
 
-    public void changeBookCopies(Book book, int newCopies){
+    public void changeBookCopies(Book book, int newCopies) throws NegativeCopiesException{
         book.setCopies(newCopies);
     }
 
+    public void changeBookCategory(Book book, String newCat) throws NotFoundException {
+
+            Category oldCategory = LibraryManager.findBookCategory(book);
+            Category newCategory = LibraryManager.findCategory(newCat);
+            oldCategory.getCatBooksISBN().remove(book.getISBN());
+            newCategory.addBookToCategory(book.getISBN());
+        
+    }
+
     //creation, deletion and modification of a category
-    public void createCategory(String category){
+    public void createCategory(String category) throws NotUniqueException{
+        for (Category c : LibraryManager.allCategories){
+            if(c.getCategory().equals(category)) {
+                throw new NotUniqueException("Category name already used. Please enter a different category name.");
+            }
+        }
         Category c = new Category(category);
         LibraryManager.getAllCategories().add(c);
     }
@@ -117,11 +121,9 @@ public class Admin extends User {
             catch (NotFoundException n) {}
         }
 
-        for (Category c : LibraryManager.allCategories){
-            if (c.equals(delCategory)){
-                LibraryManager.allCategories.remove(c);
-            }
-        }
+        
+        LibraryManager.allCategories.remove(delCategory);
+            
     }
 
     public void changeCategoryName(Category category, String newCategoryName) throws NotUniqueException{
@@ -133,10 +135,6 @@ public class Admin extends User {
     //modification of user info, also modify in all users, ratings, reviews, borr books, user borr books
     public void changeUserName(User user, String newUsername) throws NotUniqueException{
         user.setUsername(newUsername);
-        
-        for (BorrowedBooks bb : user.getBorrowedBooks()) {
-            bb.setUsername(newUsername);
-        }
 
         for (Book b : LibraryManager.allBooks){
             for (Ratings r : b.getRatings()){
@@ -185,25 +183,28 @@ public class Admin extends User {
 
     //deletion of a user
     public void deleteUser(User delUser) {
+        List<BorrowedBooks> del = new ArrayList<>();
         for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
             if (bb.getUsername().equals(delUser.getUsername())){
-                try {
-                    // terminate borrow so the copies will be fixed
-                    TerminateBorrow(delUser.getUsername(), LibraryManager.findBook(bb.getBookISBN()));
-                    LibraryManager.allBorrowedBooks.remove(bb);
-                }
-                catch(NotFoundException n) {
-                    // book not found - does not exist in the Library - don't need to change copies
-                    LibraryManager.allBorrowedBooks.remove(bb);
-                }
-                
+                // terminate borrow so the copies will be fixed
+                del.add(bb);
             }
         }
 
+        for (BorrowedBooks bb : del) {
+            TerminateBorrow(bb);
+            LibraryManager.allBorrowedBooks.remove(bb);
+        }
+
+        List<User> del2 = new ArrayList<>();
         for (User user : LibraryManager.allUsers){
             if (user.equals(delUser)){
-                LibraryManager.allUsers.remove(user);
+                del2.add(user);
             }
+        }
+
+        for (User user : del2) {
+            LibraryManager.allUsers.remove(user);
         }
     }
 
@@ -211,22 +212,36 @@ public class Admin extends User {
     public List<BorrowedBooks> seeAllActiveBorrows(){
         List<BorrowedBooks> ActiveBorrowedBooks;
         ActiveBorrowedBooks = new ArrayList<>();
+        
         for (BorrowedBooks bb : LibraryManager.getAllBorrowedBooks()){
             if  (bb.getActiveBorrow()==true){
                 ActiveBorrowedBooks.add(bb);
             }
         }
+
         return ActiveBorrowedBooks;
     }
       
     //terminate borrows
-    public void TerminateBorrow(String username, Book borrowedBook){
+    public void TerminateBorrow(BorrowedBooks borrowedBook) {
         List<BorrowedBooks> activeBorrows = seeAllActiveBorrows();
         for (BorrowedBooks bb : activeBorrows){
-            if (bb.getUsername().equals(username) && bb.getBookISBN().equals(borrowedBook.getISBN())){
-                bb.setActiveBorrow(false);
-                int c = borrowedBook.getCopies() + 1;
-                borrowedBook.setCopies(c);
+            if (bb.equals(borrowedBook)){
+                try {
+                    bb.setActiveBorrow(false);
+                    Book b = LibraryManager.findBook(bb.getBookISBN());
+                    int c = b.getCopies() + 1;
+                    
+                    b.setCopies(c);
+                }
+                catch (NegativeCopiesException e) {
+                    //it will never be thrown
+                }
+                catch (NotFoundException e) {
+                    //The book has been deleted so we romove it from all borrbooks
+                    LibraryManager.allBorrowedBooks.remove(borrowedBook);
+                }
+                break;
             }
         }
 

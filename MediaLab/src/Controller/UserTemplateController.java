@@ -35,9 +35,10 @@ public class UserTemplateController implements Initializable{
 
 
    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize(URL arg0, ResourceBundle arg1)  {
 
         GeneralController.setTemplate(template);
+        GeneralController.loadTemplatePage("/View/all_books.fxml");
         
         searchBookButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

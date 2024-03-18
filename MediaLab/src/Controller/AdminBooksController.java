@@ -3,8 +3,10 @@
 package Controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import Model.Book;
 import Model.Category;
 import Model.LibraryManager;
 import javafx.fxml.FXML;
@@ -49,8 +51,8 @@ public class AdminBooksController implements Initializable{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/admin_books_by_category.fxml"));
             AnchorPane anchorPane = loader.load();
             AdminBooksByCategoryController controller = loader.getController();
-
-            controller.setBookListData(category.getCatBooks(), category.getCategory());
+            List<Book> catBooks = LibraryManager.findCatBooks(category.getCatBooksISBN());
+            controller.setBookListData(catBooks, category.getCategory());
 
             vbox.getChildren().add(anchorPane); // Add AnchorPane to the VBox
         }

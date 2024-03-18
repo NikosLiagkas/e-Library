@@ -62,7 +62,7 @@
       </Button>
       <Button fx:id="reviewButton" blendMode="MULTIPLY" mnemonicParsing="false" onMouseClicked="#openRateReview" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #87A2C0;" text="Review">
          <HBox.margin>
-            <Insets right="20.0" top="40.0" />
+            <Insets right="25.0" top="40.0" />
          </HBox.margin>
          <effect>
             <ColorAdjust saturation="0.75" />

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CustomExceptions.BorrowLimitException;
+import CustomExceptions.NegativeCopiesException;
 import CustomExceptions.NoCopiesException;
 import CustomExceptions.NotUniqueException;
 
@@ -14,7 +15,6 @@ public class User implements Serializable{
     private String LastName;
     private String IDnumber;
     private String email;
-    private List<BorrowedBooks> borrowedBooks;
     private boolean isAdmin;
 
     public User(String username, String password, String FirstName, String LastName, String IDnumber, String email){
@@ -24,7 +24,6 @@ public class User implements Serializable{
         this.LastName = LastName;
         this.IDnumber = IDnumber;
         this.email = email;
-        this.borrowedBooks = new ArrayList<>();
         this.isAdmin = false;
     }
 
@@ -32,7 +31,7 @@ public class User implements Serializable{
     public void borrowBook(Book book) throws NoCopiesException, BorrowLimitException{
         
         int count = 0;
-        for (BorrowedBooks b : this.borrowedBooks){
+        for (BorrowedBooks b : LibraryManager.getUsersBorrowedBooks(this.username)){
             if (b.getActiveBorrow()==true) {
                 count++;
             }
@@ -40,8 +39,13 @@ public class User implements Serializable{
         if (count < 2){
             if (book.getCopies() > 0){
                 BorrowedBooks b = new BorrowedBooks(this.username, book.getISBN()); //???
-                this.borrowedBooks.add(b);
-                LibraryManager.getAllBorrowedBooks().add(b);
+                LibraryManager.allBorrowedBooks.add(b);
+
+                try {
+                    book.setCopies(book.getCopies() - 1);
+                } catch (NegativeCopiesException e) {
+                    // this will never happen , we checked if there are available copies above
+                }
                 //return "You have succesfully borrowed" + book.getTitle(); Must goooooooooooooooooooooooooo
             }
             else {
@@ -58,7 +62,7 @@ public class User implements Serializable{
     public List<Book> searchBookByTitle(String search){
         List<Book> matches = new ArrayList<>();
         for (Book b : LibraryManager.allBooks){
-            if (b.getTitle().contains(search)){
+            if (b.getTitle().toLowerCase().contains(search.toLowerCase())){
                 matches.add(b);
             }           
         }
@@ -68,7 +72,7 @@ public class User implements Serializable{
     public List<Book> searchBookByAuthor(String search){
         List<Book> matches = new ArrayList<>();
         for (Book b : LibraryManager.allBooks){
-            if (b.getAuthor().contains(search)){
+            if (b.getAuthor().toLowerCase().contains(search.toLowerCase())){
                 matches.add(b);
             }           
         }
@@ -116,7 +120,7 @@ public class User implements Serializable{
     }
 
     public void rateBook(Book book, int rating){
-        for (BorrowedBooks b : this.borrowedBooks){
+        for (BorrowedBooks b : LibraryManager.getUsersBorrowedBooks(this.username)){
             if (b.getBookISBN().equals(book.getISBN())){
                 book.createRating(this.username, rating);
             }
@@ -125,9 +129,12 @@ public class User implements Serializable{
     }
 
     public void reviewBook(Book book, String review){
-        for (BorrowedBooks b : this.borrowedBooks){
-            if (b.getBookISBN() == book.getISBN()){
+        List<BorrowedBooks> myborrows = LibraryManager.getUsersBorrowedBooks(this.username);
+        
+        for (BorrowedBooks b : myborrows){
+            if (b.getBookISBN().equals(book.getISBN())){
                 book.createReview(this.username, review);
+                break;
             }
         }
         
@@ -194,14 +201,6 @@ public class User implements Serializable{
 
     public String getEmail() {
         return email;
-    }
-
-    public void setBorrowedBooks(List<BorrowedBooks> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
-    }
-
-    public List<BorrowedBooks> getBorrowedBooks() {
-        return borrowedBooks;
     }
 
     public void setIsAdmin(boolean isAdmin) {

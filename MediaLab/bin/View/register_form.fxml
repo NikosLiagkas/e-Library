@@ -18,7 +18,7 @@
                   <Font name="Georgia Bold Italic" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #87A2C0;" text="Back to Homepage" AnchorPane.leftAnchor="14.0">
+            <Button fx:id="backButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#openLoginPage" style="-fx-background-color: #87A2C0;" text="Back to Homepage" AnchorPane.leftAnchor="14.0">
                <effect>
                   <ColorAdjust saturation="0.33" />
                </effect>
@@ -44,7 +44,7 @@
             <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="188.0" promptText="Password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
             <PasswordField fx:id="confirmPasswordField" layoutX="225.0" layoutY="223.0" promptText="Confirm Password" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
             <TextField fx:id="idNumberField" layoutX="226.0" layoutY="259.0" promptText="ID number" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6" />
-            <Button fx:id="signupButton" layoutX="225.0" layoutY="297.0" mnemonicParsing="false" prefWidth="149.6" style="-fx-background-color: #87A2C0;" text="Sign Up" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6">
+            <Button fx:id="signupButton" layoutX="225.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#SignUp" prefWidth="149.6" style="-fx-background-color: #87A2C0;" text="Sign Up" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.6">
                <effect>
                   <ColorAdjust saturation="0.75" />
                </effect>
