@@ -27,8 +27,8 @@ public class AdminBooksByCategoryController {
         bookObservableList.addAll(allCatBooks);
 
         // calculate listView height according to Listcell height so that all books can be shown whith no scrollbar
-        double height = bookObservableList.size() * 80 + 30;
-        bookList.setPrefHeight(height);
+        //double height = bookObservableList.size() * 80 + 30;
+        //bookList.setPrefHeight(height);
 
         bookList.setItems(bookObservableList);
         bookList.setCellFactory(booklist -> new AdminCellBooks());
