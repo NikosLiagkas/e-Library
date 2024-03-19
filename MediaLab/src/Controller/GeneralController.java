@@ -1,8 +1,6 @@
 package Controller;
 
 import java.io.IOException;
-
-import Model.Book;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +11,6 @@ public class GeneralController {
 
     private static Stage stage;
     private static BorderPane template; 
-    private static Book book;
 
     public static void loadPage(String fxmlFile) {
         try {
@@ -34,14 +31,6 @@ public class GeneralController {
         catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    public static void setBook(Book book) {
-        GeneralController.book = book;
-    }
-
-    public static Book getBook() {
-        return book;
     }
 
     public static void setStage(Stage stage) {

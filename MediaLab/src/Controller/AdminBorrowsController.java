@@ -21,8 +21,6 @@ public class AdminBorrowsController implements Initializable{
 
     private ObservableList<BorrowedBooks> borrBookObservableList;
 
-    
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         borrBookObservableList = FXCollections.observableArrayList();
@@ -33,16 +31,12 @@ public class AdminBorrowsController implements Initializable{
         
             ActiveBorrowedBooks = admin.seeAllActiveBorrows();
 
-            
-
             borrBookObservableList.addAll(
                 ActiveBorrowedBooks
             );
 
         }
-        catch (NotFoundException e) {
-            
-        }
+        catch (NotFoundException e) {}
 
         allBorrowsList.setItems(borrBookObservableList);
         allBorrowsList.setCellFactory(bookListView -> new AdminCellBorrows());

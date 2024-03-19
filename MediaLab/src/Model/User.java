@@ -28,6 +28,7 @@ public class User implements Serializable{
     }
 
 
+    // borrow book - fix copies - create borrow
     public void borrowBook(Book book) throws NoCopiesException, BorrowLimitException{
         
         int count = 0;
@@ -38,7 +39,7 @@ public class User implements Serializable{
         }
         if (count < 2){
             if (book.getCopies() > 0){
-                BorrowedBooks b = new BorrowedBooks(this.username, book.getISBN()); //???
+                BorrowedBooks b = new BorrowedBooks(this.username, book.getISBN());
                 LibraryManager.allBorrowedBooks.add(b);
 
                 try {
@@ -46,7 +47,6 @@ public class User implements Serializable{
                 } catch (NegativeCopiesException e) {
                     // this will never happen , we checked if there are available copies above
                 }
-                //return "You have succesfully borrowed" + book.getTitle(); Must goooooooooooooooooooooooooo
             }
             else {
                 throw new NoCopiesException(); 

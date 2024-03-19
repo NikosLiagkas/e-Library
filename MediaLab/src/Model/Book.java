@@ -202,13 +202,14 @@ public class Book implements Serializable{
                 }
             }
             if (rating>0 && rating<6){
-                    Ratings rate = new Ratings(username, rating);
-                    this.ratings.add(rate);
-                    change_avgRating();
+                Ratings rate = new Ratings(username, rating);
+                this.ratings.add(rate);
+                change_avgRating();
             }
         }
         catch(InvalidRatingException i) {
             i.printStackTrace();
+            //this will never happen, because i have tonggle group in frontend
         }
     }
 

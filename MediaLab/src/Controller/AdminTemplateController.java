@@ -37,7 +37,6 @@ public class AdminTemplateController implements Initializable{
 
     @FXML
     void LogOut(ActionEvent event) {
-        GeneralController.setBook(null);
         GeneralController.setTemplate(null);
 
         LibraryManager.setLoggedUser(null);

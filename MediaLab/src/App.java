@@ -16,8 +16,6 @@ import Model.User;
 
 public class App extends Application{
 
-    
-
     @Override
     public void init() {
         LibraryManager.retrieveData();
@@ -29,7 +27,7 @@ public class App extends Application{
         GeneralController.setStage(primaryStage);
         GeneralController.loadPage("/View/home.fxml");
         
-        data();
+        //data();
     }
 
     @Override

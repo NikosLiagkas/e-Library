@@ -13,7 +13,6 @@ public class LibraryManager {
     public static List<User> allUsers;
     public static List<Category> allCategories;
     public static User loggedUser;
-    //public static User loggedUser = new User("Nikolios", "123456", "Nikos", "Liagas", "AM123456", "nikos@gmail.com");
 
     public static void retrieveData(){
         allAdmins = Data.deserialize("src/medialab/admin.ser");
@@ -113,7 +112,6 @@ public class LibraryManager {
     public static List<Book> top5books(){
         List<Book> top5books = allBooks;
         top5books.sort((b1, b2) -> Double.compare(b1.getAvgRating(), b2.getAvgRating()) );
-        //top5books.reversed();
 
         if (top5books.size() < 5){
             return top5books.reversed();
@@ -123,6 +121,7 @@ public class LibraryManager {
         }
     }
 
+    // get all borrowed books for a user (active and inactive)
     public static List<BorrowedBooks> getUsersBorrowedBooks(String username) {
         List<BorrowedBooks> result = new ArrayList<>();
         

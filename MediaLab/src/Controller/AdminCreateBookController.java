@@ -49,9 +49,6 @@ public class AdminCreateBookController {
         String copies = copiesField.getText().strip();
         String category = categoryField.getText().strip();
         
-        
-
-
         if (title.isEmpty() || author.isEmpty() || publisher.isEmpty() || isbn.isEmpty() || releaseYear.isEmpty() || copies.isEmpty() || category.isEmpty()) {
             Alert a = new Alert(AlertType.ERROR);
                 a.setContentText("Must fill in all fields.");

@@ -23,6 +23,7 @@ public class Admin extends User {
         Book b = new Book(title, author, publisher, ISBN, release_year, copies);
         LibraryManager.getAllBooks().add(b);
 
+        // it is checked by controller that this category exixts when createBook is called
         List<Category> c = LibraryManager.getAllCategories();
         for (Category categories : c){
             if (categories.equals(category)) {
@@ -32,7 +33,7 @@ public class Admin extends User {
 
     }
 
-    //delete a book
+    //delete a book and all its borrows, active or inactive
     public void deleteBook(Book delBook){
         List<BorrowedBooks> del = new ArrayList<>();
         for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
@@ -45,11 +46,7 @@ public class Admin extends User {
             LibraryManager.allBorrowedBooks.remove(bb);
         }
 
-        LibraryManager.allBooks.remove(delBook);
-            
-
-        
-        
+        LibraryManager.allBooks.remove(delBook); 
     }
 
     //modification of a book
@@ -65,8 +62,11 @@ public class Admin extends User {
         book.setPublisher(newPublisher);
     }
 
+    // change ISBN in book - in Borrows active or inactive - in category
     public void changeBookISBN(Book book, String newISBN) throws NotUniqueException{
         String previousISBN = book.getISBN();
+        
+        // if incorrect ISBN this throws exception
         book.setISBN(newISBN);
 
         for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
@@ -81,8 +81,6 @@ public class Admin extends User {
                 c.getCatBooksISBN().add(newISBN);
             }
         }
-
-
     }
 
     public void changeBookReleaseYear(Book book, int newReleaseYear) throws DateException {
@@ -123,24 +121,22 @@ public class Admin extends User {
             catch (NotFoundException n) {}
         }
 
-        
-        LibraryManager.allCategories.remove(delCategory);
-            
+        LibraryManager.allCategories.remove(delCategory);     
     }
 
     public void changeCategoryName(Category category, String newCategoryName) throws NotUniqueException{
         category.setCategory(newCategoryName);
     }
 
-
-
-    //modification of user info, also modify in all users, ratings, reviews, borr books, user borr books
+    //modification of user info, also modify in all users, ratings, reviews, borr books
     public void changeUserName(User user, String newUsername) throws NotUniqueException{
+        // if incorrect username this throws exception
+        String previousUsername = user.getUsername();
         user.setUsername(newUsername);
 
         for (Book b : LibraryManager.allBooks){
             for (Ratings r : b.getRatings()){
-                if (r.getUsername().equals(user.getUsername())){
+                if (r.getUsername().equals(previousUsername)){
                     r.setUsername(newUsername);
                 }
             }
@@ -148,20 +144,17 @@ public class Admin extends User {
 
         for (Book b : LibraryManager.allBooks){
             for (Reviews r : b.getReviews()){
-                if (r.getUsername().equals(user.getUsername())){
+                if (r.getUsername().equals(previousUsername)){
                     r.setUsername(newUsername);
                 }
             }
         }
 
         for (BorrowedBooks b : LibraryManager.allBorrowedBooks) {
-            if (b.getUsername().equals(user.getUsername())) {
+            if (b.getUsername().equals(previousUsername)) {
                 b.setUsername(newUsername);
             }
-        }
-
-        
-        
+        }  
     }
 
     public void changeUserPassword(User user, String newPassword){
@@ -183,7 +176,7 @@ public class Admin extends User {
         user.setEmail(newEmail);  
     }
 
-    //deletion of a user
+    //deletion of a user - his borrows active or inactive
     public void deleteUser(User delUser) {
         List<BorrowedBooks> del = new ArrayList<>();
         for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
@@ -241,7 +234,6 @@ public class Admin extends User {
                     //it will never be thrown
                 }
                 catch (NotFoundException e) {
-                    e.printStackTrace();
                     //The book has been deleted so we romove it from all borrbooks
                     LibraryManager.allBorrowedBooks.remove(borrowedBook);
                 }

@@ -38,7 +38,7 @@ public class AdminCellCategories extends ListCell<Category>{
 
     @FXML
     void changeCatName(MouseEvent event) {
-        String newCatName = changeCatNameField.getText();
+        String newCatName = changeCatNameField.getText().strip();
 
         if (newCatName.isEmpty()) {
             return;

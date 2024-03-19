@@ -69,6 +69,7 @@ public class RateReviewController implements Initializable{
             Alert a = new Alert(AlertType.ERROR);
             a.setContentText("Must choose a number to submit Rating.");
             a.showAndWait();
+            return;
         }
 
         switch (chosenButton.getText()) {
@@ -118,7 +119,7 @@ public class RateReviewController implements Initializable{
                 f.showAndWait();
                 break;
             default:
-                Alert g = new Alert(AlertType.INFORMATION);
+                Alert g = new Alert(AlertType.ERROR);
                 g.setContentText("Must choose a number to submit Rating.");
                 g.showAndWait();
                 break;
@@ -128,7 +129,7 @@ public class RateReviewController implements Initializable{
     @FXML
     void submitReview(MouseEvent event) {
         User user = LibraryManager.getLoggedUser();
-        String review = reviewField.getText();
+        String review = reviewField.getText().strip();
         
         if (!review.isEmpty()) {
             user.reviewBook(saveBook, review);

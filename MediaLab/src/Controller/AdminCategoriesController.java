@@ -35,7 +35,7 @@ public class AdminCategoriesController implements Initializable {
 
     @FXML
     void createCategory(MouseEvent event) {
-        String catName = categoryField.getText();
+        String catName = categoryField.getText().strip();
         
         if (catName.isEmpty()) {
             return;

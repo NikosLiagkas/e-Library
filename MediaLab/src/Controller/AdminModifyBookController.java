@@ -165,7 +165,6 @@ public class AdminModifyBookController implements Initializable{
 
         
         GeneralController.loadTemplatePage("/View/admin_modify_book.fxml");
-
     }
 
     @Override

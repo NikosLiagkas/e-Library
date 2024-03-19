@@ -64,7 +64,6 @@ public class UserTemplateController implements Initializable{
         logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GeneralController.setBook(null);
                 GeneralController.setTemplate(null);
 
                 LibraryManager.setLoggedUser(null);
