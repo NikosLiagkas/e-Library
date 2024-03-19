@@ -40,26 +40,31 @@ public class AdminCellCategories extends ListCell<Category>{
     void changeCatName(MouseEvent event) {
         String newCatName = changeCatNameField.getText();
 
-        try{
-            Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
-            admin.changeCategoryName(getItem(), newCatName);
-            Alert a = new Alert(AlertType.INFORMATION);
-            a.setContentText("Category Name changed succesfully.");
-            a.setOnCloseRequest(s -> {
-                GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
-            });
-            a.showAndWait();
+        if (newCatName.isEmpty()) {
+            return;
         }
-        catch (NotUniqueException e) {
-            Alert a = new Alert(AlertType.ERROR);
-            a.setContentText(e.getMessage());
-            a.setOnCloseRequest(s -> {
-                GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
-            });
-            a.showAndWait();
-        }
-        catch (NotFoundException e) {
-            //will not happen
+        else {
+            try{
+                Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
+                admin.changeCategoryName(getItem(), newCatName);
+                Alert a = new Alert(AlertType.INFORMATION);
+                a.setContentText("Category Name changed succesfully.");
+                a.setOnCloseRequest(s -> {
+                    GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
+                });
+                a.showAndWait();
+            }
+            catch (NotUniqueException e) {
+                Alert a = new Alert(AlertType.ERROR);
+                a.setContentText(e.getMessage());
+                a.setOnCloseRequest(s -> {
+                    GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
+                });
+                a.showAndWait();
+            }
+            catch (NotFoundException e) {
+                //will not happen
+            }
         }
     }
 

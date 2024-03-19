@@ -22,7 +22,7 @@ public class UserHomepageController implements Initializable{
         bookObservableList = FXCollections.observableArrayList();    
         
         bookObservableList.addAll(
-            LibraryManager.allBooks
+            LibraryManager.allBooks.reversed()
         );
     }
      @Override

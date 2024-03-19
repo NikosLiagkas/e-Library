@@ -41,8 +41,8 @@ public class HomeController implements Initializable{
 
     @FXML
     void Login(MouseEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText().strip();
+        String password = passwordField.getText().strip();
 
         try{
             User u = LibraryManager.login(username, password);

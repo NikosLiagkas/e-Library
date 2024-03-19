@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="Hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="Hbox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="114.0" prefWidth="600.0">
+      <VBox prefHeight="114.0">
          <children>
             <Label fx:id="user" prefHeight="22.0" prefWidth="600.0" text="user">
                <font>

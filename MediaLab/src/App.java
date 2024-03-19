@@ -1,27 +1,18 @@
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import Controller.GeneralController;
-import CustomExceptions.BorrowLimitException;
-import CustomExceptions.NoCopiesException;
 import Model.Admin;
 import Model.Book;
 import Model.BorrowedBooks;
 import Model.Category;
 import Model.LibraryManager;
 import Model.User;
-import Model.Book.Reviews;
+
 
 public class App extends Application{
 
@@ -38,7 +29,7 @@ public class App extends Application{
         GeneralController.setStage(primaryStage);
         GeneralController.loadPage("/View/home.fxml");
         
-        //data();
+        data();
     }
 
     @Override
@@ -316,7 +307,6 @@ public class App extends Application{
 
             user4.borrowBook(b10);
             user4.rateBook(b10, 5);
-            user4.reviewBook(b10, "Captivating.");
             user4.reviewBook(b10, "Classic masterpiece, captivating odyssey.");
             
             for (BorrowedBooks bb : LibraryManager.getAllBorrowedBooks()) {
@@ -346,31 +336,3 @@ public class App extends Application{
 
 
 
-/* 
-public class App extends Application {
-    @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event){
-                System.out.println("Hello World");
-            }
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-   
-
-Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-public static void main(String[] args) {
-    launch(args);
-}
-}
-*/

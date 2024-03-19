@@ -92,6 +92,18 @@ public class AdminModifyBookController implements Initializable{
             return;
         }
 
+        if (!category.isEmpty()) {
+            try {
+                admin.changeBookCategory(saveBook, category);
+            }
+            catch (NotFoundException e) {
+                Alert a = new Alert(AlertType.ERROR);
+                a.setContentText("Invalid Category. Please enter an existing category.");
+                a.showAndWait();           
+            }
+            
+        }
+
         if (!title.isEmpty()) {
             admin.changeBookName(saveBook, title);
         }
@@ -151,17 +163,7 @@ public class AdminModifyBookController implements Initializable{
             }
         }
 
-        if (!category.isEmpty()) {
-            try {
-                admin.changeBookCategory(saveBook, category);
-            } 
-            catch (NotFoundException e) {
-                Alert a = new Alert(AlertType.ERROR);
-                a.setContentText("Invalid Category. Please enter an existing category.");
-                a.showAndWait();           
-            }
-            
-        }
+        
         GeneralController.loadTemplatePage("/View/admin_modify_book.fxml");
 
     }

@@ -91,7 +91,7 @@ public class SignUpController {
 
             User u = new User(username, password, FirstName, LastName, IDnum, email);
             LibraryManager.allUsers.add(u);
-            Alert a = new Alert(AlertType.ERROR);
+            Alert a = new Alert(AlertType.INFORMATION);
             a.setContentText("Sign up was succesful. You can now login.");
             a.setOnCloseRequest(s -> {
                 GeneralController.loadPage("/View/home.fxml");

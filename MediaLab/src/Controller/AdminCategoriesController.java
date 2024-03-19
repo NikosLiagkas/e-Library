@@ -36,27 +36,32 @@ public class AdminCategoriesController implements Initializable {
     @FXML
     void createCategory(MouseEvent event) {
         String catName = categoryField.getText();
-
-        try{
-            Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
-            admin.createCategory(catName);
-            Alert a = new Alert(AlertType.INFORMATION);
-            a.setContentText("Category has been added succesfully.");
-            a.setOnCloseRequest(s -> {
-                GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
-            });
-            a.showAndWait();
+        
+        if (catName.isEmpty()) {
+            return;
         }
-        catch (NotUniqueException e) {
-            Alert a = new Alert(AlertType.ERROR);
-            a.setContentText(e.getMessage());
-            a.setOnCloseRequest(s -> {
-                GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
-            });
-            a.showAndWait();
-        }
-        catch (NotFoundException e) {
-            //will not happen
+        else {
+            try{
+                Admin admin = LibraryManager.getAdmin(LibraryManager.loggedUser);
+                admin.createCategory(catName);
+                Alert a = new Alert(AlertType.INFORMATION);
+                a.setContentText("Category has been added succesfully.");
+                a.setOnCloseRequest(s -> {
+                    GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
+                });
+                a.showAndWait();
+            }
+            catch (NotUniqueException e) {
+                Alert a = new Alert(AlertType.ERROR);
+                a.setContentText(e.getMessage());
+                a.setOnCloseRequest(s -> {
+                    GeneralController.loadTemplatePage("/View/admin_all_categories.fxml");
+                });
+                a.showAndWait();
+            }
+            catch (NotFoundException e) {
+                //will not happen
+            }
         }
     }
 

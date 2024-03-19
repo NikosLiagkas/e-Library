@@ -66,17 +66,18 @@ public class Admin extends User {
     }
 
     public void changeBookISBN(Book book, String newISBN) throws NotUniqueException{
+        String previousISBN = book.getISBN();
         book.setISBN(newISBN);
 
         for (BorrowedBooks bb : LibraryManager.allBorrowedBooks){
-            if (bb.getBookISBN().equals(book.getISBN())){
+            if (bb.getBookISBN().equals(previousISBN)){
                 bb.setBookISBN(newISBN);
             }
         }
 
         for (Category c : LibraryManager.allCategories) {
-            if (c.getCatBooksISBN().contains(book.getISBN())){
-                c.getCatBooksISBN().remove(book.getISBN());
+            if (c.getCatBooksISBN().contains(previousISBN)){
+                c.getCatBooksISBN().remove(previousISBN);
                 c.getCatBooksISBN().add(newISBN);
             }
         }
@@ -93,11 +94,12 @@ public class Admin extends User {
     }
 
     public void changeBookCategory(Book book, String newCat) throws NotFoundException {
-
-            Category oldCategory = LibraryManager.findBookCategory(book);
-            Category newCategory = LibraryManager.findCategory(newCat);
-            oldCategory.getCatBooksISBN().remove(book.getISBN());
-            newCategory.addBookToCategory(book.getISBN());
+        
+        Category newCategory = LibraryManager.findCategory(newCat);
+        Category oldCategory = LibraryManager.findBookCategory(book);
+            
+        oldCategory.getCatBooksISBN().remove(book.getISBN());
+        newCategory.addBookToCategory(book.getISBN());
         
     }
 
