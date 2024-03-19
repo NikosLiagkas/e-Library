@@ -235,9 +235,11 @@ public class Admin extends User {
                     b.setCopies(c);
                 }
                 catch (NegativeCopiesException e) {
+                    e.printStackTrace();
                     //it will never be thrown
                 }
                 catch (NotFoundException e) {
+                    e.printStackTrace();
                     //The book has been deleted so we romove it from all borrbooks
                     LibraryManager.allBorrowedBooks.remove(borrowedBook);
                 }

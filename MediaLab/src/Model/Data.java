@@ -31,6 +31,7 @@ public class Data {
     }
 
     // deserialize whole list of any type
+    @SuppressWarnings("unchecked")
     public static <T> List<T> deserialize(String targetFile) {
         List<T> objectList = null;
         try {

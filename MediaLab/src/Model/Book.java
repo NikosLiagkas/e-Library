@@ -33,7 +33,8 @@ public class Book implements Serializable{
     }
 
     public void change_avgRating(){
-        if (ratings.isEmpty()){
+        
+        if (this.ratings.isEmpty()){
             this.avgRating = 0;
         }
         else {
@@ -44,6 +45,7 @@ public class Book implements Serializable{
             double sum = (double) ratingSum;
             double s = (double) ratings.size();
             double avg = sum / s;
+            
             this.avgRating = Math.round(avg * 100.0) / 100.0;
         }
     }  
@@ -202,6 +204,7 @@ public class Book implements Serializable{
             if (rating>0 && rating<6){
                     Ratings rate = new Ratings(username, rating);
                     this.ratings.add(rate);
+                    change_avgRating();
             }
         }
         catch(InvalidRatingException i) {

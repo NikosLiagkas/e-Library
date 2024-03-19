@@ -113,13 +113,13 @@ public class LibraryManager {
     public static List<Book> top5books(){
         List<Book> top5books = allBooks;
         top5books.sort((b1, b2) -> Double.compare(b1.getAvgRating(), b2.getAvgRating()) );
-        top5books.reversed();
+        //top5books.reversed();
 
         if (top5books.size() < 5){
-            return top5books;
+            return top5books.reversed();
         }
         else {
-            return top5books.subList(0, 5);
+            return top5books.subList(top5books.size()-5, top5books.size()).reversed();
         }
     }
 
